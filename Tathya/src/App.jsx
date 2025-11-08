@@ -5,12 +5,15 @@ import Navbar from './layouts/navbar/navbar';
 import Home from './pages/home';
 import About from './pages/about';
 import './index.css';
+import DotGridBackground from './Background/DotGridBackground';
+import Header from './layouts/header/header';
 
 const App = () => {
     return (
-        <div>
-            <Navbar /> {/* Always visible */}
-            <div className="container">
+        <DotGridBackground className="container">
+            <Header />
+            <Navbar />
+            <div>
                 <Routes>
                     <Route
                         path="/"
@@ -22,7 +25,7 @@ const App = () => {
                     />
                 </Routes>
             </div>
-        </div>
+        </DotGridBackground>
     );
 };
 

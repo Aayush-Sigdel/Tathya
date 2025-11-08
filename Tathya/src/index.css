@@ -6,6 +6,36 @@
 }
 .container {
     width: 100vw;
-    height: 100vh;
-    background-color: aqua;
+    height: 98vh;
+}
+/* Dark mode styles */
+.dark body {
+    background-color: #111827;
+    color: #f9fafb;
+}
+
+.dark a {
+    color: #93c5fd;
+}
+
+.dark .switch-body {
+    background-color: #374151 !important;
+    box-shadow: 0 0 8px 2px #37415155 !important;
+}
+
+.dark h1,
+.dark h2,
+.dark h3,
+.dark h4,
+.dark h5,
+.dark h6 {
+    color: #f3f4f6;
+}
+
+.dark .text-gray-700 {
+    color: #f3f4f6 !important;
+}
+
+.dark .text-yellow-500 {
+    color: #fde68a !important;
 }

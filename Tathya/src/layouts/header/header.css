@@ -1,0 +1,28 @@
+.header-main {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 64px;
+    box-sizing: border-box;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.header-items {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 8px;
+    margin: 0;
+}
+
+.header-main > div {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
