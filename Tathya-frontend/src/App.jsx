@@ -7,12 +7,14 @@ import About from './pages/about';
 import './index.css';
 import DotGridBackground from './Background/DotGridBackground';
 import Header from './layouts/header/header';
+import ContentLayout from './layouts/mainContents/contentLayout';
 
 const App = () => {
     return (
         <DotGridBackground className="container">
             <Header />
             <Navbar />
+            <ContentLayout />
             <div>
                 <Routes>
                     <Route
