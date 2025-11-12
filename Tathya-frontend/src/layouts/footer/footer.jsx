@@ -75,7 +75,7 @@ const Footer = () => {
       </div>
       {/* Bottom Bar */}
       <div className={styles["footer-bottom"]}>
-        <p className={styles["copyright"]}>© Copyright ekantipur.com</p>
+        <p className={styles["copyright"]}>© Copyright tathya.com</p>
         <div className={styles["footer-links"]}>
           <Link to="termsOfService" className={styles["footer-link"]}>Terms of Service</Link>
           <Link to="privacyPolicy" className={styles["footer-link"]}>Privacy Policy</Link>
