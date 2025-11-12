@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Menu, User, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import './navbar.css';
+import './navbar.module.css';
 
 export default function Navbar() {
     const [activeNav, setActiveNav] = useState('Home');
