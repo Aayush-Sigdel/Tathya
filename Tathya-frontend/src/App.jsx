@@ -8,6 +8,7 @@ import NewsArticle from './pages/NewsArticle/NewsArticle';
 import './index.css';
 import DotGridBackground from '../src/components/Background/DotGridBackground';
 import Header from './layouts/header/header';
+import Footer from './layouts/footer/footer';
 import ContentLayout from './layouts/mainContents/contentLayout';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
             <Header />
             <Navbar />
             <ContentLayout />
+            <Footer />
             <div>
                 <Routes>
                     <Route
