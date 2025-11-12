@@ -2,63 +2,42 @@
 import React, { useState } from 'react';
 import { Menu, User, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import './navbar.module.css';
+import styles from './navbar.module.css';
 
 export default function Navbar() {
     const [activeNav, setActiveNav] = useState('Home');
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    const navItems = [
-        { name: 'Home', path: '/' },
-        { name: 'News', path: '/about' },
-        { name: 'Contact Us', path: '/contact' },
-        { name: 'About Us', path: '/about-us' },
-    ];
-
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
-    };
+    const navItems = ['Home', 'Pages', 'Contact', 'About'];
 
     return (
-        <nav className="main-nav-container">
-            <button
-                className="menu-btn"
-                onClick={toggleMobileMenu}>
+        <nav className={styles['main-nav-container']}>
+            <button className={styles['menu-btn']}>
                 <Menu size={24} />
             </button>
 
-            <ul
-                className={`nav-links-container ${
-                    isMobileMenuOpen ? 'mobile-open' : ''
-                }`}>
+            <ul className={styles['nav-links-container']}>
                 {navItems.map((item) => (
                     <li
-                        key={item.name}
-                        className="nav-item">
+                        key={item}
+                        className={styles['nav-item']}>
                         <Link
-                            to={item.path}
-                            className={`nav-link ${
-                                activeNav === item.name ? 'nav-link-active' : ''
+                            to={item.toLowerCase().replace(/\s+/g, '')}
+                            className={`${styles['nav-link']} ${
+                                activeNav === item
+                                    ? styles['nav-link-active']
+                                    : ''
                             }`}
-                            onClick={() => {
-                                setActiveNav(item.name);
-                                setIsMobileMenuOpen(false);
-                            }}>
-                            {item.name}
+                            onClick={() => setActiveNav(item)}>
+                            {item}
                         </Link>
                     </li>
                 ))}
             </ul>
 
-            <div className="nav-right-container">
-                <button
-                    className="icon-btn"
-                    aria-label="User Profile">
+            <div className={styles['nav-right-container']}>
+                <button className={styles['icon-btn']}>
                     <User size={24} />
                 </button>
-                <button
-                    className="icon-btn"
-                    aria-label="Search">
+                <button className={styles['icon-btn']}>
                     <Search size={24} />
                 </button>
             </div>
