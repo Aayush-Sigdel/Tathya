@@ -1,4 +1,5 @@
 import React from 'react';
+
 import NewsPreview from '../components/newsPreview/newspreview';
 import { useNavigate } from 'react-router-dom';
 import './about.css';
@@ -25,6 +26,7 @@ const About = () => {
             </div>
         </div>
     );
-};
+
+
 
 export default About;
