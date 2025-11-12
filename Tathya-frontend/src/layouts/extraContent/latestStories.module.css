@@ -1,0 +1,107 @@
+.latest-stories-container {
+  background-color: #f3f4f6;
+  padding: 32px 24px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 24px 0;
+}
+
+.stories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.story-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.story-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.story-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.story-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.category-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.separator {
+  color: #9ca3af;
+  font-size: 13px;
+}
+
+.location-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.story-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+
+.story-image-container {
+  flex-shrink: 0;
+  width: 120px;
+  height: 90px;
+}
+
+.story-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .latest-stories-container {
+    padding: 24px 16px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .story-item {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+
+  .story-image-container {
+    width: 100%;
+    height: 180px;
+  }
+
+  .story-title {
+    font-size: 16px;
+  }
+}

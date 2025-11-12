@@ -9,6 +9,9 @@ import DotGridBackground from './Background/DotGridBackground';
 import Header from './layouts/header/header';
 import Footer from './layouts/footer/footer';
 import ContentLayout from './layouts/mainContents/contentLayout';
+import LatestStories from './layouts/extraContent/latestStories';
+import ExtraLayout from './layouts/extraContent/extraLayout';
+import MostRead from './layouts/extraContent/mostRead';
 
 const App = () => {
     return (
@@ -16,6 +19,9 @@ const App = () => {
             <Header />
             <Navbar />
             <ContentLayout />
+            <MostRead />
+            <ExtraLayout />
+
             <Footer />
             <div>
                 <Routes>

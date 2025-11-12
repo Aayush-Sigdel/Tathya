@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Circle } from "lucide-react";
 import styles from "./leftContent.module.css";
+import BiasMeta from "../bias/biasMeta";
 
 const LeftContent = () => {
   const newsStories = [
@@ -60,21 +61,10 @@ const LeftContent = () => {
             <h3 className={styles["news-title"]}>{story.title}</h3>
 
             <div className={styles["news-meta"]}>
-              <div className={styles["bias-indicator"]}>
-                <span
-                  className={styles["bias-bar"]}
-                  style={{
-                    width: "20px",
-                    backgroundColor: "#dc2626",
-                  }}
-                ></span>
-                <span className={styles["bias-text"]}>
-                  {story.biasPercentage}% Center coverage
-                </span>
-              </div>
-              <span className={styles["bias-text"]}>
-                {story.sources} sources
-              </span>
+              <BiasMeta 
+                biasPercentage={story.biasPercentage} 
+                sources={story.sources} 
+              />
             </div>
           </Link>
         ))}

@@ -1,0 +1,31 @@
+.bias-meta-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bias-bars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bias-bar-left,
+.bias-bar-center {
+  width: 20px;
+  height: 4px;
+  border-radius: 2px;
+}
+
+.bias-bar-left {
+  background-color: #dc2626;
+}
+
+.bias-bar-center {
+  background-color: #3b82f6;
+}
+
+.meta-text {
+  font-size: 12px;
+  color: #6b7280;
+}

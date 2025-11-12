@@ -1,0 +1,43 @@
+.latest-similar-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 24px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #ffffff;
+}
+
+.latest-section {
+  width: 100%;
+}
+
+.similar-section {
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .latest-similar-container {
+    grid-template-columns: 1fr 350px;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .latest-similar-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 20px 16px;
+  }
+  
+  .similar-section {
+    order: -1; /* Move Similar Topics above Latest Stories on mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .latest-similar-container {
+    padding: 16px;
+  }
+}
