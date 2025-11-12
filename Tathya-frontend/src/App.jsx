@@ -4,8 +4,9 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './layouts/navbar/navbar';
 import Home from './pages/home';
 import About from './pages/about';
+import NewsArticle from './pages/NewsArticle/NewsArticle';
 import './index.css';
-import DotGridBackground from './Background/DotGridBackground';
+import DotGridBackground from '../src/components/Background/DotGridBackground';
 import Header from './layouts/header/header';
 import ContentLayout from './layouts/mainContents/contentLayout';
 
@@ -24,6 +25,10 @@ const App = () => {
                     <Route
                         path="/about"
                         element={<About />}
+                    />
+                    <Route
+                        path="/news/:articleId"
+                        element={<NewsArticle />}
                     />
                 </Routes>
             </div>
