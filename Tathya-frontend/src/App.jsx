@@ -7,6 +7,7 @@ import About from './pages/about';
 import './index.css';
 import DotGridBackground from './Background/DotGridBackground';
 import Header from './layouts/header/header';
+import Footer from './layouts/footer/footer';
 import ContentLayout from './layouts/mainContents/contentLayout';
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
             <Header />
             <Navbar />
             <ContentLayout />
+            <Footer />
             <div>
                 <Routes>
                     <Route
