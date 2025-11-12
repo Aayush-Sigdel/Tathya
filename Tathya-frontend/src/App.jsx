@@ -8,12 +8,14 @@ import NewsArticle from './pages/NewsArticle/NewsArticle';
 import './index.css';
 import DotGridBackground from '../src/components/Background/DotGridBackground';
 import Header from './layouts/header/header';
+import ContentLayout from './layouts/mainContents/contentLayout';
 
 const App = () => {
     return (
         <DotGridBackground className="container">
             <Header />
             <Navbar />
+            <ContentLayout />
             <div>
                 <Routes>
                     <Route
