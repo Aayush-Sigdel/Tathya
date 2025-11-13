@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./centerContent.module.css";
+import BiasMeta from "../bias/biasMeta";
 
 const CenterContent = () => {
   const featuredArticle = {
@@ -126,17 +127,10 @@ const CenterContent = () => {
               <h3 className={styles["article-title"]}>{article.title}</h3>
 
               <div className={styles["article-meta"]}>
-                <div className={styles["bias-indicator"]}>
-                  <span
-                    className={styles["bias-dot"]}
-                    style={{ backgroundColor: "#6b7280" }}
-                  ></span>
-
-                  <span className={styles["bias-text"]}>
-                    {article.biasPercentage}% {article.bias} coverage
-                  </span>
-                </div>
-
+              <BiasMeta 
+                biasPercentage={article.biasPercentage} 
+                sources={article.sources} 
+              />
                 <span className={styles["sources-text"]}>
                   {article.sources} sources
                 </span>
