@@ -1,0 +1,348 @@
+.news-preview-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+}
+
+.news-preview-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.news-preview-header h2 {
+    font-size: 2.5rem;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.category-btn {
+    padding: 8px 20px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #555;
+    font-size: 14px;
+}
+
+.category-btn:hover {
+    border-color: #1976d2;
+    color: #1976d2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.2);
+}
+
+.category-btn.active {
+    background: #1976d2;
+    color: white;
+    border-color: #1976d2;
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+}
+
+.news-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.news-preview-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.news-preview-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.news-preview-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+}
+
+.category-badge {
+    background: #1976d2;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-size: 12px;
+}
+
+.meta-item svg {
+    color: #1976d2;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-lead {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-summary {
+    margin-bottom: 20px;
+}
+
+.card-summary h4 {
+    font-size: 14px;
+    color: #1976d2;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.card-summary ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-summary li {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+    padding-left: 15px;
+    position: relative;
+    line-height: 1.4;
+}
+
+.card-summary li:before {
+    content: '•';
+    color: #1976d2;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.metrics {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.word-count {
+    font-size: 11px;
+    color: #999;
+    background: #f5f5f5;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.sentiment-indicator {
+    font-size: 10px;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.read-more {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #1976d2;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover {
+    color: #1565c0;
+}
+
+.arrow {
+    transition: transform 0.3s ease;
+}
+
+.arrow.animated {
+    transform: translateX(5px);
+}
+
+.no-articles {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .news-preview-container {
+        padding: 15px;
+    }
+
+    .news-preview-header h2 {
+        font-size: 2rem;
+    }
+
+    .news-preview-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card-content {
+        padding: 15px;
+    }
+
+    .card-meta {
+        gap: 10px;
+    }
+
+    .card-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+
+    .metrics {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-filters {
+        gap: 5px;
+    }
+
+    .category-btn {
+        padding: 6px 15px;
+        font-size: 12px;
+    }
+
+    .card-image {
+        height: 150px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-lead {
+        font-size: 13px;
+    }
+}
+
+/* Loading Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.news-preview-card {
+    animation: fadeInUp 0.6s ease-out;
+    animation-delay: calc(var(--card-index, 0) * 0.1s);
+}
+
+/* Hover effects for better UX */
+.news-preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(25, 118, 210, 0.1) 0%,
+        rgba(25, 118, 210, 0.05) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.news-preview-card:hover::before {
+    opacity: 1;
+}
