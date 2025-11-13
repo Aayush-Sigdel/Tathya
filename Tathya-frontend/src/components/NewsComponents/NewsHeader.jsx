@@ -19,7 +19,6 @@ const NewsHeader = ({ publishedDate, location, updatedTime, onShare }) => {
     };
 
     const handleBookmark = () => {
-        
         console.log('Article bookmarked');
         alert('Article bookmarked!');
     };
@@ -48,16 +47,11 @@ const NewsHeader = ({ publishedDate, location, updatedTime, onShare }) => {
                     <LinkedinIcon
                         onClick={() => handleShareClick('linkedin')}
                     />
-                    <RedoDotIcon onClick={() => window.location.reload()} />
                     <Mail onClick={() => handleShareClick('email')} />
-                    <Code onClick={() => console.log('Embed code')} />
                 </div>
                 <div className="news-share-icon">
                     <Link onClick={handleCopyLink} />
                     <BookMarkedIcon onClick={handleBookmark} />
-                    <ChartNoAxesColumn
-                        onClick={() => console.log('Analytics')}
-                    />
                 </div>
             </div>
         </div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Eye, ArrowRight, Calendar, Globe } from 'lucide-react';
+import { Clock, Eye, ArrowRight, Calendar, Globe, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import dummyData from '../NewsComponents/dummydata.json';
 import './newspreview.css';
+import dummyData from '../NewsComponents/dummydata.json';
 
 const NewsPreview = ({
     onArticleSelect,
@@ -10,23 +10,40 @@ const NewsPreview = ({
     onCategoryChange,
 }) => {
     const [hoveredCard, setHoveredCard] = useState(null);
+    const [newsGroups, setNewsGroups] = useState([]);
     const navigate = useNavigate();
 
-    const articles = dummyData.articles;
+    // Load news groups from dummydata.json (single source of truth)
+    useEffect(() => {
+        try {
+            const groups = Array.isArray(dummyData?.newsGroups)
+                ? dummyData.newsGroups
+                : [];
+            setNewsGroups(groups);
+        } catch (e) {
+            console.error('Failed to load dummy data', e);
+            setNewsGroups([]);
+        }
+    }, []);
 
     // Debug: Log the current category
     console.log('NewsPreview - Selected Category:', selectedCategory);
-    console.log('NewsPreview - Total Articles:', articles.length);
+    console.log('NewsPreview - Total News Groups:', newsGroups.length);
 
-    // Filter articles based on selected category
-    const filteredArticles =
+    // Filter news groups based on selected category
+    const filteredNewsGroups =
         selectedCategory === 'All'
-            ? articles
-            : articles.filter(
-                  (article) => article.category === selectedCategory
+            ? newsGroups
+            : newsGroups.filter((group) =>
+                  group.news.some(
+                      (article) => article.category === selectedCategory
+                  )
               );
 
-    console.log('NewsPreview - Filtered Articles:', filteredArticles.length);
+    console.log(
+        'NewsPreview - Filtered News Groups:',
+        filteredNewsGroups.length
+    );
 
     // Calculate time ago from posted date
     const getTimeAgo = (dateString) => {
@@ -42,146 +59,183 @@ const NewsPreview = ({
         }
     };
 
-    // Get sentiment color
-    const getSentimentColor = (sentiment) => {
-        switch (sentiment) {
-            case 'positive':
-                return '#4CAF50';
-            case 'negative':
-                return '#f44336';
-            case 'neutral':
-                return '#FFC107';
-            default:
-                return '#9E9E9E';
-        }
+    // Get category color based on the primary article's category
+    const getCategoryColor = (category) => {
+        const colors = {
+            Politics: '#e74c3c',
+            Business: '#3498db',
+            Technology: '#9b59b6',
+            Environment: '#27ae60',
+            National: '#f39c12',
+            Economy: '#34495e',
+        };
+        return colors[category] || '#95a5a6';
     };
 
-    const handleCardClick = (article) => {
+    // Get the primary article (first one) from the news group
+    const getPrimaryArticle = (newsGroup) => {
+        return newsGroup.news[0];
+    };
+
+    // Calculate average credibility score for the news group
+    const getAverageCredibility = (newsGroup) => {
+        const total = newsGroup.news.reduce((sum, article) => {
+            const upvotes = article.metrics.credibility.upvote;
+            const downvotes = article.metrics.credibility.downvote;
+            const score = (upvotes / (upvotes + downvotes)) * 100;
+            return sum + score;
+        }, 0);
+        return Math.round(total / newsGroup.news.length);
+    };
+
+    const handleCardClick = (newsGroup) => {
         if (onArticleSelect) {
-            onArticleSelect(article);
+            onArticleSelect(newsGroup);
         } else {
-            navigate(`/news/${article._id.$oid}`);
+            navigate(`/news/${newsGroup.groupId}`);
         }
     };
 
     return (
         <div className="news-preview-container">
-            <div className="news-preview-header">
-                <h2>Latest News - {selectedCategory}</h2>
-                <p className="category-description">
-                    {selectedCategory === 'All'
-                        ? `Showing all ${filteredArticles.length} articles`
-                        : `${filteredArticles.length} articles in ${selectedCategory} category`}
-                </p>
-            </div>
-
             <div className="news-preview-grid">
-                {filteredArticles.map((article, index) => (
-                    <div
-                        key={article._id.$oid}
-                        className="news-preview-card"
-                        onClick={() => handleCardClick(article)}
-                        onMouseEnter={() => setHoveredCard(index)}
-                        onMouseLeave={() => setHoveredCard(null)}>
-                        <div className="card-image">
-                            <img
-                                src={article.imageUrl}
-                                alt={article.title}
-                                onError={(e) => {
-                                    e.target.src =
-                                        'https://via.placeholder.com/400x200?text=News+Image';
-                                }}
-                            />
-                            <div className="card-overlay">
-                                <span
-                                    className="category-badge"
-                                    style={{
-                                        backgroundColor: getSentimentColor(
-                                            article.metrics.sentiment
-                                        ),
-                                    }}>
-                                    {article.category}
-                                </span>
-                            </div>
-                        </div>
+                {filteredNewsGroups.map((newsGroup, index) => {
+                    const primaryArticle = getPrimaryArticle(newsGroup);
+                    const credibilityScore = getAverageCredibility(newsGroup);
 
-                        <div className="card-content">
-                            <div className="card-meta">
-                                <div className="meta-item">
-                                    <Calendar size={14} />
-                                    <span>{getTimeAgo(article.postedAt)}</span>
-                                </div>
-                                <div className="meta-item">
-                                    <Clock size={14} />
-                                    <span>{article.metrics.readTime}</span>
-                                </div>
-                                <div className="meta-item">
-                                    <Globe size={14} />
-                                    <span>{article.newsPortal}</span>
-                                </div>
-                            </div>
-
-                            <h3 className="card-title">{article.title}</h3>
-
-                            <p className="card-lead">{article.lead}</p>
-
-                            <div className="card-summary">
-                                <h4>Key Points:</h4>
-                                <ul>
-                                    {article.keyPoints
-                                        .slice(0, 3)
-                                        .map((point, idx) => (
-                                            <li key={idx}>{point}</li>
-                                        ))}
-                                </ul>
-                            </div>
-
-                            <div className="card-footer">
-                                <div className="metrics">
-                                    <span className="word-count">
-                                        {article.metrics.wordCount} words
-                                    </span>
-                                    <div
-                                        className="sentiment-indicator"
+                    return (
+                        <div
+                            key={newsGroup.groupId}
+                            className="news-preview-card"
+                            onClick={() => handleCardClick(newsGroup)}
+                            onMouseEnter={() => setHoveredCard(index)}
+                            onMouseLeave={() => setHoveredCard(null)}>
+                            <div className="card-image">
+                                <img
+                                    src={primaryArticle.imageUrl}
+                                    alt={primaryArticle.title}
+                                    onError={(e) => {
+                                        e.target.src =
+                                            'https://placehold.co/600x400';
+                                    }}
+                                />
+                                <div className="card-overlay">
+                                    <span
+                                        className="category-badge"
                                         style={{
-                                            backgroundColor: getSentimentColor(
-                                                article.metrics.sentiment
+                                            backgroundColor: getCategoryColor(
+                                                primaryArticle.category
                                             ),
                                         }}>
-                                        {article.metrics.sentiment}
+                                        {primaryArticle.category}
+                                    </span>
+                                    <div className="sources-count">
+                                        <Users size={14} />
+                                        <span>
+                                            {newsGroup.sources.length} sources
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="card-content">
+                                <div className="card-meta">
+                                    <div className="meta-item">
+                                        <Calendar size={14} />
+                                        <span>
+                                            {getTimeAgo(
+                                                primaryArticle.postedAt
+                                            )}
+                                        </span>
+                                    </div>
+                                    <div className="meta-item credibility-score">
+                                        <Globe size={14} />
+                                        <span>
+                                            {credibilityScore}% credible
+                                        </span>
                                     </div>
                                 </div>
 
-                                <div className="read-more">
-                                    <Eye size={16} />
-                                    <span>Read Full Article</span>
-                                    <ArrowRight
-                                        size={16}
-                                        className={`arrow ${
-                                            hoveredCard === index
-                                                ? 'animated'
-                                                : ''
-                                        }`}
-                                    />
+                                <h3 className="card-title">
+                                    {primaryArticle.title}
+                                </h3>
+
+                                <p className="card-lead">
+                                    {primaryArticle.lead}
+                                </p>
+
+                                <div className="card-sources">
+                                    <h4>Coverage by:</h4>
+                                    <div className="sources-list">
+                                        {newsGroup.sources
+                                            .slice(0, 3)
+                                            .map((source, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    className="source-tag">
+                                                    {source}
+                                                </span>
+                                            ))}
+                                        {newsGroup.sources.length > 3 && (
+                                            <span className="source-tag more">
+                                                +{newsGroup.sources.length - 3}{' '}
+                                                more
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="card-footer">
+                                    <div className="metrics">
+                                        <span className="articles-count">
+                                            {newsGroup.news.length} articles
+                                        </span>
+                                        <div
+                                            className="credibility-indicator"
+                                            style={{
+                                                backgroundColor:
+                                                    credibilityScore > 70
+                                                        ? '#27ae60'
+                                                        : credibilityScore > 50
+                                                        ? '#f39c12'
+                                                        : '#e74c3c',
+                                            }}>
+                                            {credibilityScore}%
+                                        </div>
+                                    </div>
+
+                                    <div className="read-more">
+                                        <Eye size={16} />
+                                        <span>Compare Sources</span>
+                                        <ArrowRight
+                                            size={16}
+                                            className={`arrow ${
+                                                hoveredCard === index
+                                                    ? 'animated'
+                                                    : ''
+                                            }`}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
 
-            {filteredArticles.length === 0 && (
+            {filteredNewsGroups.length === 0 && (
                 <div className="no-articles">
-                    <h3>No articles found</h3>
+                    <h3>No news groups found</h3>
                     <p>
-                        No articles found for the "{selectedCategory}" category.
+                        No news coverage found for the "{selectedCategory}"
+                        category.
                     </p>
                     <button
                         className="reset-filter-btn"
                         onClick={() =>
                             onCategoryChange && onCategoryChange('All')
                         }>
-                        View All Articles
+                        View All News
                     </button>
                 </div>
             )}

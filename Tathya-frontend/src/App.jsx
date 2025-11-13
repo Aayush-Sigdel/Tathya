@@ -9,20 +9,18 @@ import './index.css';
 import DotGridBackground from '../src/components/Background/DotGridBackground';
 import Header from './layouts/header/header';
 import Footer from './layouts/footer/footer';
-import ContentLayout from './layouts/mainContents/contentLayout';
-import LatestStories from './layouts/extraContent/latestStories';
-import ExtraLayout from './layouts/extraContent/extraLayout';
-import MostRead from './layouts/extraContent/mostRead';
 import News from './pages/NewsArticle/News';
-import Contact from './pages/Contact/Contact'; // Fixed import
+import Contact from './pages/Contact/Contact';
 import NewsCatagory from './layouts/NewsCatagory/newsCatagory';
 
 const App = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const location = useLocation();
 
-    // Show category filter only on news-related pages
-    const showCategoryFilter = ['/', '/news'].includes(location.pathname);
+    // Show category filter on specific pages
+    const showCategoryFilter = ['/', '/news', '/about'].includes(
+        location.pathname
+    );
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
@@ -32,8 +30,6 @@ const App = () => {
         <DotGridBackground className="container">
             <Header />
             <Navbar />
-            
-            
 
             {/* Show category filter only on relevant pages */}
             {showCategoryFilter && (
