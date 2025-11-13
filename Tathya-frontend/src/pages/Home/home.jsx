@@ -3,6 +3,8 @@ import NewsPreview from '../../components/newsPreview/newspreview';
 import { useNavigate } from 'react-router-dom';
 import ContentLayout from '../../layouts/mainContents/contentLayout';
 import '../../index.css';
+import MostRead from '../../layouts/extraContent/mostRead';
+import ExtraLayout from '../../layouts/extraContent/extraLayout';
 
 function Home({ selectedCategory, onCategoryChange }) {
     const navigate = useNavigate();
@@ -14,9 +16,11 @@ function Home({ selectedCategory, onCategoryChange }) {
     return (
         <div className="home-page">
             <ContentLayout />
+            <MostRead />
+            <ExtraLayout />
 
             {/* News Section */}
-            <div className="home-news-section">
+            {/* <div className="home-news-section">
                 <div className="section-header">
                     <h2>Latest News</h2>
                     <p>Stay updated with the latest happenings</p>
@@ -26,7 +30,7 @@ function Home({ selectedCategory, onCategoryChange }) {
                     selectedCategory={selectedCategory}
                     onCategoryChange={onCategoryChange}
                 />
-            </div>
+            </div> */}
         </div>
     );
 }
