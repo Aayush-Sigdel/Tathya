@@ -1,10 +1,9 @@
 import React from 'react';
-
-import NewsPreview from '../components/newsPreview/newspreview';
+import NewsPreview from '../../components/newsPreview/newspreview';
 import { useNavigate } from 'react-router-dom';
 import './about.css';
 
-const About = () => {
+const About = ({ selectedCategory, onCategoryChange }) => {
     const navigate = useNavigate();
 
     const handleArticleSelect = (article) => {
@@ -22,7 +21,6 @@ const About = () => {
                         the world
                     </p>
                 </div>
-                <NewsPreview onArticleSelect={handleArticleSelect} />
             </div>
         </div>
     );

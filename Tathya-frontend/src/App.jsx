@@ -1,39 +1,82 @@
 // App.jsx
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './layouts/navbar/navbar';
-import Home from './pages/home';
-import About from './pages/about';
+import Home from './pages/Home/home';
+import About from './pages/About/about';
 import NewsArticle from './pages/NewsArticle/NewsArticle';
 import './index.css';
 import DotGridBackground from '../src/components/Background/DotGridBackground';
 import Header from './layouts/header/header';
 import Footer from './layouts/footer/footer';
-import ContentLayout from './layouts/mainContents/contentLayout';
+import News from './pages/NewsArticle/News';
+import Contact from './pages/Contact/Contact'; // Fixed import
+import NewsCatagory from './layouts/NewsCatagory/newsCatagory';
 
 const App = () => {
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const location = useLocation();
+
+    // Show category filter only on news-related pages
+    const showCategoryFilter = ['/', '/news'].includes(location.pathname);
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category);
+    };
+
     return (
         <DotGridBackground className="container">
             <Header />
             <Navbar />
-            <ContentLayout />
-            <Footer />
+
+            {/* Show category filter only on relevant pages */}
+            {showCategoryFilter && (
+                <NewsCatagory
+                    selectedCategory={selectedCategory}
+                    onCategoryChange={handleCategoryChange}
+                />
+            )}
+
             <div>
                 <Routes>
                     <Route
                         path="/"
-                        element={<Home />}
+                        element={
+                            <Home
+                                selectedCategory={selectedCategory}
+                                onCategoryChange={handleCategoryChange}
+                            />
+                        }
                     />
                     <Route
-                        path="/about"
-                        element={<About />}
+                        path="/news"
+                        element={
+                            <News
+                                selectedCategory={selectedCategory}
+                                onCategoryChange={handleCategoryChange}
+                            />
+                        }
                     />
                     <Route
                         path="/news/:articleId"
                         element={<NewsArticle />}
                     />
+                    <Route
+                        path="/about"
+                        element={
+                            <About
+                                selectedCategory={selectedCategory}
+                                onCategoryChange={handleCategoryChange}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/contact"
+                        element={<Contact />}
+                    />
                 </Routes>
             </div>
+            <Footer />
         </DotGridBackground>
     );
 };

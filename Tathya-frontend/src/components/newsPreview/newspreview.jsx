@@ -1,24 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Clock, Eye, ArrowRight, Calendar, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import dummyData from '../NewsComponents/dummydata.json';
 import './newspreview.css';
 
-const NewsPreview = ({ onArticleSelect }) => {
-    const [selectedCategory, setSelectedCategory] = useState('All');
+const NewsPreview = ({
+    onArticleSelect,
+    selectedCategory = 'All',
+    onCategoryChange,
+}) => {
     const [hoveredCard, setHoveredCard] = useState(null);
     const navigate = useNavigate();
 
     const articles = dummyData.articles;
-    const categories = ['All', ...dummyData.metadata.categories];
 
- 
+    // Debug: Log the current category
+    console.log('NewsPreview - Selected Category:', selectedCategory);
+    console.log('NewsPreview - Total Articles:', articles.length);
+
+    // Filter articles based on selected category
     const filteredArticles =
         selectedCategory === 'All'
             ? articles
             : articles.filter(
                   (article) => article.category === selectedCategory
               );
+
+    console.log('NewsPreview - Filtered Articles:', filteredArticles.length);
 
     // Calculate time ago from posted date
     const getTimeAgo = (dateString) => {
@@ -52,7 +60,6 @@ const NewsPreview = ({ onArticleSelect }) => {
         if (onArticleSelect) {
             onArticleSelect(article);
         } else {
-         
             navigate(`/news/${article._id.$oid}`);
         }
     };
@@ -60,19 +67,12 @@ const NewsPreview = ({ onArticleSelect }) => {
     return (
         <div className="news-preview-container">
             <div className="news-preview-header">
-                <h2>Latest News</h2>
-                <div className="category-filters">
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            className={`category-btn ${
-                                selectedCategory === category ? 'active' : ''
-                            }`}
-                            onClick={() => setSelectedCategory(category)}>
-                            {category}
-                        </button>
-                    ))}
-                </div>
+                <h2>Latest News - {selectedCategory}</h2>
+                <p className="category-description">
+                    {selectedCategory === 'All'
+                        ? `Showing all ${filteredArticles.length} articles`
+                        : `${filteredArticles.length} articles in ${selectedCategory} category`}
+                </p>
             </div>
 
             <div className="news-preview-grid">
@@ -172,7 +172,17 @@ const NewsPreview = ({ onArticleSelect }) => {
 
             {filteredArticles.length === 0 && (
                 <div className="no-articles">
-                    <p>No articles found for the selected category.</p>
+                    <h3>No articles found</h3>
+                    <p>
+                        No articles found for the "{selectedCategory}" category.
+                    </p>
+                    <button
+                        className="reset-filter-btn"
+                        onClick={() =>
+                            onCategoryChange && onCategoryChange('All')
+                        }>
+                        View All Articles
+                    </button>
                 </div>
             )}
         </div>
