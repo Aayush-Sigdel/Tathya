@@ -23,9 +23,7 @@ const App = () => {
     const location = useLocation();
 
     // Show category filter on specific pages
-    const showCategoryFilter = ['/', '/news', '/about'].includes(
-        location.pathname
-    );
+    const showCategoryFilter = ['/news'].includes(location.pathname);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);

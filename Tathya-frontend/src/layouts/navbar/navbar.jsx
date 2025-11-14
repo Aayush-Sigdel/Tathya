@@ -13,7 +13,7 @@ export default function Navbar() {
     const navItems = [
         { name: 'Home', path: '/' },
         { name: 'News', path: '/news' },
-        { name: 'Pages', path: '/pages' },
+        { name: 'Blindspot', path: '/pages' },
         { name: 'Contact', path: '/contact' },
         { name: 'About', path: '/about' },
     ];
@@ -22,7 +22,6 @@ export default function Navbar() {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    // Get current active nav based on current path
     const getCurrentActiveNav = () => {
         const currentItem = navItems.find(
             (item) => item.path === location.pathname

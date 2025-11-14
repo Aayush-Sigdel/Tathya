@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewsIframe.css';
 
 const NewsIframe = ({ src, title }) => {
     return (

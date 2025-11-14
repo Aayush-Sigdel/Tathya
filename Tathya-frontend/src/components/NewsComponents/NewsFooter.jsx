@@ -1,5 +1,6 @@
 import React from 'react';
 import { Info, Wrench } from 'lucide-react';
+import './NewsFooter.css';
 
 const NewsFooter = ({ onFeedback }) => {
     return (

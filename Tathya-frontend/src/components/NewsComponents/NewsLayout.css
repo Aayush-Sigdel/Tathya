@@ -1,0 +1,316 @@
+/* Main Layout and General Styles */
+.main {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Main Layout Container - 2 Column Grid (Content + Right Sidebar) */
+.news-layout-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto 30px;
+}
+
+/* Main Content Area */
+.news-main-content {
+    min-height: 600px;
+}
+
+.news-main-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Bottom Section - Iframe and Engagement/Comments */
+.bottom-section-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* Article Content Styles */
+.current-source-indicator {
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-left: 4px solid #1976d2;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 0 8px 8px 0;
+}
+
+.source-label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.source-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1976d2;
+    background: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+}
+
+.article-image-container {
+    padding: 0 30px;
+    margin-bottom: 30px;
+}
+
+.article-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.article-content {
+    padding: 0 30px 30px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.article-lead {
+    margin-bottom: 25px;
+}
+
+.article-lead p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.6;
+    font-style: italic;
+    border-left: 4px solid #1976d2;
+    padding-left: 20px;
+    background: #f8f9fa;
+    padding: 20px 20px 20px 24px;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.article-description {
+    margin-bottom: 25px;
+}
+
+.article-description p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444;
+    text-align: justify;
+}
+
+.article-summary {
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e1bee7;
+}
+
+.article-summary h3 {
+    color: #1976d2;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.article-summary p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Typewriter Animation Styles */
+.typewriter-container {
+    margin-bottom: 25px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e1bee7;
+    position: relative;
+}
+
+.typewriter-container h3 {
+    color: #1976d2;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.typewriter-text {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typewriter 3s steps(50, end), blink-caret 0.75s step-end infinite;
+}
+
+.typewriter-text.completed {
+    border-right: none;
+    white-space: normal;
+    animation: none;
+}
+
+/* Loading Styles */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    padding: 40px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #1976d2;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-container p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.news-main-container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Enhanced interactive effects */
+.news-share-icon svg,
+.action-btn,
+.upvote-btn,
+.submit-comment-btn {
+    transition: all 0.3s ease;
+}
+
+.news-share-icon svg:hover,
+.action-btn:hover,
+.upvote-btn:hover {
+    transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1400px) {
+    .news-layout-container {
+        grid-template-columns: 1fr 280px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .news-layout-container {
+        grid-template-columns: 1fr;
+    }
+
+    .bottom-section-container {
+        grid-template-columns: 1fr 350px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .bottom-section-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 10px;
+    }
+
+    .article-content {
+        padding: 20px 15px;
+    }
+
+    .article-image-container {
+        padding: 0 15px;
+    }
+
+    .article-image {
+        height: 250px;
+    }
+
+    .article-lead p {
+        font-size: 1.1rem;
+        padding: 15px 15px 15px 19px;
+    }
+
+    .current-source-indicator {
+        flex-direction: column;
+        gap: 5px;
+        align-items: flex-start;
+        padding: 12px 15px;
+    }
+
+    .bottom-section-container {
+        gap: 15px;
+    }
+
+    .typewriter-text {
+        font-size: 14px;
+        animation: typewriter 2.5s steps(40, end),
+            blink-caret 0.75s step-end infinite;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-image {
+        height: 200px;
+    }
+
+    .article-lead p {
+        font-size: 1rem;
+    }
+
+    .article-description p {
+        font-size: 0.95rem;
+    }
+
+    .typewriter-text {
+        font-size: 13px;
+        animation: typewriter 2s steps(30, end),
+            blink-caret 0.75s step-end infinite;
+    }
+}

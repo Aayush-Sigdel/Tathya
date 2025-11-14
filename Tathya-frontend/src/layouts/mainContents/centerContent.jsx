@@ -7,13 +7,11 @@ import dummyData from '../../components/NewsComponents/dummydata.json';
 const CenterContent = () => {
     const newsGroups = dummyData.newsGroups || [];
 
-    // Helper function to extract location from lead
     const extractLocation = (lead) => {
         const locationMatch = lead.match(/^([^,]+),/);
         return locationMatch ? locationMatch[1].trim() : 'Nepal';
     };
 
-    // Helper function to calculate average credibility percentage
     const getAverageCredibility = (newsGroup) => {
         const total = newsGroup.news.reduce((sum, article) => {
             const cred = article.metrics?.credibility || {};
@@ -26,14 +24,13 @@ const CenterContent = () => {
         return Math.round(total / newsGroup.news.length);
     };
 
-    // Get featured article (first news group's primary article)
     const featuredGroup = newsGroups[0];
     const featuredArticle = featuredGroup
         ? {
               id: featuredGroup.groupId,
               title: featuredGroup.news[0].title,
               image: featuredGroup.news[0].imageUrl,
-              biasLeft: 30, // Mock bias data - keeping original layout
+              biasLeft: 40, // Mock bias data - keeping original layout
               biasCenter: 55,
               biasRight: 15,
           }
@@ -73,7 +70,7 @@ const CenterContent = () => {
                             src={featuredArticle.image}
                             alt={featuredArticle.title}
                             onError={(e) => {
-                                e.target.src = 'https://placehold.co/800x400';
+                                e.target.src = 'https://placehold.co/1000x400';
                             }}
                         />
 
@@ -81,42 +78,6 @@ const CenterContent = () => {
                             <h1 className={styles['featured-title']}>
                                 {featuredArticle.title}
                             </h1>
-
-                            {/* Bias bar */}
-                            <div className={styles['bias-bar-container']}>
-                                <div
-                                    className={styles['bias-segment']}
-                                    style={{
-                                        width: `${featuredArticle.biasLeft}%`,
-                                        backgroundColor: '#dc2626',
-                                    }}>
-                                    <span className={styles['bias-label']}>
-                                        Left {featuredArticle.biasLeft}%
-                                    </span>
-                                </div>
-
-                                <div
-                                    className={styles['bias-segment']}
-                                    style={{
-                                        width: `${featuredArticle.biasCenter}%`,
-                                        backgroundColor: '#f3f4f6',
-                                    }}>
-                                    <span className={styles['bias-label']}>
-                                        Center {featuredArticle.biasCenter}%
-                                    </span>
-                                </div>
-
-                                <div
-                                    className={styles['bias-segment']}
-                                    style={{
-                                        width: `${featuredArticle.biasRight}%`,
-                                        backgroundColor: '#2563eb',
-                                    }}>
-                                    <span className={styles['bias-label']}>
-                                        Right {featuredArticle.biasRight}%
-                                    </span>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </Link>

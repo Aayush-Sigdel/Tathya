@@ -1,0 +1,42 @@
+/* NewsFooter Styles */
+.news-main-footer {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.news-footer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+.news-footer svg {
+    width: 18px;
+    height: 18px;
+    color: #1976d2;
+}
+
+.news-footer span {
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.news-footer span:hover {
+    color: #1976d2;
+}
+
+/* Responsive Design for Footer */
+@media (max-width: 768px) {
+    .news-main-footer {
+        padding: 20px 15px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

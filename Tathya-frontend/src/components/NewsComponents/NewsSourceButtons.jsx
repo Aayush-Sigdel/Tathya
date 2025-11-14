@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewsSourceButtons.css';
 
 const NewsSourceButtons = ({ sources, onSourceSelect, activeSource }) => {
     return (

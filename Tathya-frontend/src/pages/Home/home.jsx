@@ -10,7 +10,6 @@ function Home({ selectedCategory, onCategoryChange }) {
     const navigate = useNavigate();
 
     const handleArticleSelect = (newsGroup) => {
-        // Navigate to the news group page using groupId
         navigate(`/news/${newsGroup.groupId}`);
     };
 
@@ -19,22 +18,6 @@ function Home({ selectedCategory, onCategoryChange }) {
             <ContentLayout />
             <MostRead />
             <ExtraLayout />
-
-            {/* News Section */}
-            <div className="home-news-section">
-                <div className="section-header">
-                    <h2>Latest News Coverage</h2>
-                    <p>
-                        Compare perspectives from multiple sources on the same
-                        story
-                    </p>
-                </div>
-                <NewsPreview
-                    onArticleSelect={handleArticleSelect}
-                    selectedCategory={selectedCategory}
-                    onCategoryChange={onCategoryChange}
-                />
-            </div>
         </div>
     );
 }

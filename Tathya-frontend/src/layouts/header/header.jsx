@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './header.css';
+import styles from './header.module.css';
 import ThemeSwitch from '../../components/switch/themeSwitch';
 import Loading from '../../components/Loading/Loading';
 import '../../components/Loading/Loading.css';
+import LogoSvg from '../../assets/Logo-main.svg';
+
 import {
     Calendar,
     Cloud,
@@ -116,80 +118,85 @@ const Header = () => {
 
     const getWeatherIcon = (condition) => {
         const lower = condition.toLowerCase();
-        if (lower.includes('sun') || lower.includes('clear')) return <Sun />;
-        if (lower.includes('cloud')) return <Cloud />;
+        if (lower.includes('sun') || lower.includes('clear'))
+            return <Sun width={18} />;
+        if (lower.includes('cloud')) return <Cloud width={18} />;
         if (lower.includes('rain') || lower.includes('drizzle'))
-            return <CloudRain />;
+            return <CloudRain width={18} />;
         if (lower.includes('storm') || lower.includes('thunder'))
-            return <CloudLightning />;
-        if (lower.includes('snow')) return <Snowflake />;
+            return <CloudLightning width={18} />;
+        if (lower.includes('snow')) return <Snowflake width={18} />;
         if (
             lower.includes('fog') ||
             lower.includes('mist') ||
             lower.includes('haze')
         )
-            return <CloudFog />;
-        return <Cloud />; // default fallback
+            return <CloudFog width={18} />;
+        return <Cloud width={18} />; // default fallback
     };
 
     return (
-        <header className="header-main">
-            <div className="header-inner">
-                <div className="header-items">
-                    <Calendar />
-                    <div>
-                        <p>{currentDate.day}</p>
-                        <p>{currentDate.date}</p>
-                    </div>
-                </div>
-
-                <div className="header-items">
-                    {getWeatherIcon(weather.condition)}
-                    <div>
-                        {isLoadingWeather ? (
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: '8px',
-                                }}>
-                                <Loading size="small" />
-                                <p>Loading weather...</p>
-                            </div>
-                        ) : hasLocation ? (
-                            <>
-                                <p>
-                                    {weather.temp}, {weather.condition}
-                                </p>
-                                <p>{weather.location}</p>
-                            </>
-                        ) : (
-                            <p
-                                style={{
-                                    textDecoration: 'underline',
-                                    cursor: 'pointer',
-                                    color: 'var(--accent-color, #007bff)',
-                                }}
-                                onClick={handleSetLocation}>
-                                Set Location
-                            </p>
-                        )}
-                    </div>
-                </div>
+        <header className={styles['header-main']}>
+            <div>
+                <img
+                    src={LogoSvg}
+                    alt="Tathya logo"
+                    style={{ height: '75px', marginRight: '8px' }}
+                />
             </div>
-
-            <div>Tathya</div>
-
-            <div
-                className="header-inner"
-                style={{ flexGrow: 0.2 }}>
-                <div className="header-items">
-                    <Mail />
-                    <p>SUBSCRIBE</p>
+            <div>
+                <div className={styles['header-inner']}>
+                    <div className={styles['header-items']}>
+                        {getWeatherIcon(weather.condition)}
+                        <div>
+                            {isLoadingWeather ? (
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '8px',
+                                    }}>
+                                    <Loading size="small" />
+                                    <p>Loading weather...</p>
+                                </div>
+                            ) : hasLocation ? (
+                                <>
+                                    <p style={{ fontSize: 12 }}>
+                                        {weather.temp} {weather.condition},{' '}
+                                        {weather.location}
+                                    </p>
+                                </>
+                            ) : (
+                                <p
+                                    style={{
+                                        fontSize: 12,
+                                        textDecoration: 'underline',
+                                        cursor: 'pointer',
+                                        color: 'var(--accent-color, #007bff)',
+                                    }}
+                                    onClick={handleSetLocation}>
+                                    Set Location
+                                </p>
+                            )}
+                        </div>
+                    </div>
                 </div>
+
+                <div className={styles['header-items']}>
+                    <Calendar width={18} />
+                    <div>
+                        <p style={{ fontSize: 12 }}>
+                            {currentDate.day} {currentDate.date}
+                        </p>
+                    </div>
+                </div>
+                {/* <div
+                className={styles['header-inner']}
+                style={{ flexGrow: 0.2 }}>
                 <div>
                     <ThemeSwitch />
                 </div>
+            </div> */}
             </div>
         </header>
     );
