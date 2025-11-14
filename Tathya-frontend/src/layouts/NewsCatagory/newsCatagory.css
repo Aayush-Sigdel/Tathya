@@ -1,24 +1,38 @@
 .news-category-container {
     background: white;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-    position: sticky;
+    border-radius: 15px;
+    padding: 5px;
+    margin: 0px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     top: 80px;
-    z-index: 999;
 }
 
-.category-filters {
+.category-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.category-header h2 {
+    font-size: 2rem;
+    color: #1976d2;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.category-header p {
+    color: #666;
+    font-size: 1rem;
+}
+
+.category-filter {
     display: flex;
     justify-content: center;
     gap: 15px;
     flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
 }
 
 .category-btn {
-    padding: 10px 20px;
+    padding: 12px 20px;
     border: 2px solid #e0e0e0;
     background: white;
     border-radius: 25px;
@@ -27,7 +41,11 @@
     transition: all 0.3s ease;
     color: #555;
     font-size: 14px;
-    min-width: 80px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 100px;
+    justify-content: center;
 }
 
 .category-btn:hover {
@@ -44,10 +62,24 @@
     box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
 }
 
+.category-count {
+    background: rgba(0, 0, 0, 0.1);
+    color: inherit;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.category-btn.active .category-count {
+    background: rgba(255, 255, 255, 0.2);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .news-category-container {
-        padding: 15px;
+        padding: 20px;
+        margin: 15px;
         position: relative;
         top: 0;
     }
@@ -57,9 +89,13 @@
     }
 
     .category-btn {
-        padding: 8px 16px;
+        padding: 10px 16px;
         font-size: 12px;
-        min-width: 60px;
+        min-width: 80px;
+    }
+
+    .category-header h2 {
+        font-size: 1.5rem;
     }
 }
 
@@ -69,8 +105,10 @@
     }
 
     .category-btn {
-        padding: 6px 12px;
+        padding: 8px 12px;
         font-size: 11px;
-        min-width: 50px;
+        min-width: 70px;
+        flex-direction: column;
+        gap: 4px;
     }
 }

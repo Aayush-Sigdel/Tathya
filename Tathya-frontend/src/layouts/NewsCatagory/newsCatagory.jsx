@@ -1,9 +1,25 @@
 import React from 'react';
 import dummyData from '../../components/NewsComponents/dummydata.json';
-import './newsCatagory.css';
 
 const NewsCatagory = ({ selectedCategory, onCategoryChange }) => {
     const categories = ['All', ...dummyData.metadata.categories];
+    const newsGroups = dummyData.newsGroups || [];
+
+    const handleCategoryClick = (category) => {
+        if (onCategoryChange) {
+            onCategoryChange(category);
+        }
+    };
+
+    // Count news groups that have articles in the given category
+    const getGroupCountForCategory = (category) => {
+        if (category === 'All') {
+            return newsGroups.length;
+        }
+        return newsGroups.filter((group) =>
+            group.news.some((article) => article.category === category)
+        ).length;
+    };
 
     return (
         <div className="news-category-container">
@@ -14,8 +30,11 @@ const NewsCatagory = ({ selectedCategory, onCategoryChange }) => {
                         className={`category-btn ${
                             selectedCategory === category ? 'active' : ''
                         }`}
-                        onClick={() => onCategoryChange(category)}>
+                        onClick={() => handleCategoryClick(category)}>
                         {category}
+                        <span className="category-count">
+                            {getGroupCountForCategory(category)}
+                        </span>
                     </button>
                 ))}
             </div>
