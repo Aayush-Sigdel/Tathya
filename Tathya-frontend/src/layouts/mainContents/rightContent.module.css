@@ -41,11 +41,13 @@
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid transparent;
 }
 
 .news-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  transform: translateY(-2px);
+  border-color: #e35040;
 }
 
 .card-image-container {
@@ -64,6 +66,9 @@
 
 .news-card:hover .card-image {
   transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+  transform: translateY(-2px);
+  border-color: #e35040;
 }
 
 .category-badge {

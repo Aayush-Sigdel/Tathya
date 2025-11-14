@@ -4,6 +4,7 @@ import ThemeSwitch from '../../components/switch/themeSwitch';
 import Loading from '../../components/Loading/Loading';
 import '../../components/Loading/Loading.css';
 import LogoSvg from '../../assets/Logo-main.svg';
+import {Link} from 'react-router-dom';
 
 import {
     Calendar,
@@ -138,11 +139,15 @@ const Header = () => {
     return (
         <header className={styles['header-main']}>
             <div>
+                <Link
+                    to="/"
+                    >
                 <img
                     src={LogoSvg}
                     alt="Tathya logo"
                     style={{ height: '75px', marginRight: '8px' }}
                 />
+                </Link>
             </div>
             <div>
                 <div className={styles['header-inner']}>

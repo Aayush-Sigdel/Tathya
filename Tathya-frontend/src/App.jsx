@@ -31,10 +31,10 @@ const App = () => {
 
     return (
         <DotGridBackground className="container">
-            {/* <Header />
+            <Header />
             <Navbar />
 
-            {/* Show category filter only on relevant pages 
+            {/* Show category filter only on relevant pages */}
             {showCategoryFilter && (
                 <NewsCatagory
                     selectedCategory={selectedCategory}
@@ -53,6 +53,10 @@ const App = () => {
                             />
                         }
                     />
+                    <Route 
+                        path="/profile"
+                        element={<Profile/>}
+                        />
                     <Route
                         path="/news"
                         element={
@@ -82,8 +86,8 @@ const App = () => {
                 </Routes>
             </div>
             <Footer />
-            <Auth /> */}
-            <Profile />
+            {/* <Auth />
+            <Profile /> */}
         </DotGridBackground>
     );
 };

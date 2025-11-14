@@ -53,7 +53,7 @@ const LeftContent = () => {
     return (
         <div className={styles['left-content-container']}>
             <div className={styles['header-container']}>
-                <h2 className={styles['section-title']}>Top News Stories!</h2>
+                <h2 className={styles['section-title']}>Top News Stories</h2>
             </div>
 
             <div className={styles['news-list-container']}>
@@ -74,7 +74,7 @@ const LeftContent = () => {
                 ))}
             </div>
 
-            <div className={styles['latest-update-upload-container']}>
+            {/* <div className={styles['latest-update-upload-container']}>
                 <Link
                     to="/latest"
                     className={styles['latest-update-link']}>
@@ -88,9 +88,9 @@ const LeftContent = () => {
                         />
                     </span>
                 </Link>
-            </div>
+            </div> */}
 
-            {featuredStory && (
+            {/* {featuredStory && (
                 <div className={styles['featured-story']}>
                     <img
                         src={featuredStory.image}
@@ -104,7 +104,7 @@ const LeftContent = () => {
                         {featuredStory.title}
                     </h3>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

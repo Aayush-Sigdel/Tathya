@@ -2,6 +2,7 @@
   background-color: #f9fafb;
   padding: 24px 16px;
   border-right: 1px solid #e5e7eb;
+  
 }
 
 .header-container {
@@ -30,7 +31,8 @@
 }
 
 .news-item:hover {
-  background-color: #f3f4f6;
+  background-color: #f3f3f3;
+  border-color: #e35040;
   padding-left: 8px;
   padding-right: 8px;
   margin-left: -8px;
@@ -39,7 +41,7 @@
 }
 
 .news-title {
-  font-size: 1.5rem;
+  font-size: 18px;
   font-weight: 600;
   color: #1f2937;
   margin: 0 0 12px 0;
