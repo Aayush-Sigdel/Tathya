@@ -35,9 +35,6 @@ const App = () => {
         <DotGridBackground className="container">
             {/* <Header />
             <Navbar />
-            <ContentLayout />
-            <MostRead />
-            <ExtraLayout />
 
             {/* Show category filter only on relevant pages 
             {showCategoryFilter && (
