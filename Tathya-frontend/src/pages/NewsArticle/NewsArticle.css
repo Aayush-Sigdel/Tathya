@@ -123,6 +123,57 @@
     max-width: 400px;
 }
 
+/* News Page Styles */
+.news-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+}
+
+.news-results-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.results-header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.results-header h3 {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Home News Section */
+.home-news-section {
+    margin: 40px 20px;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: #1976d2;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.section-header p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .article-navigation {
@@ -143,6 +194,23 @@
 
     .news-article-page {
         padding-top: 15px;
+    }
+
+    .news-page {
+        padding: 15px;
+    }
+
+    .news-results-container {
+        padding: 20px;
+    }
+
+    .home-news-section {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
     }
 }
 
@@ -169,6 +237,10 @@
         text-overflow: ellipsis;
         max-width: 100px;
     }
+
+    .section-header h2 {
+        font-size: 1.8rem;
+    }
 }
 
 /* Animation */
@@ -185,47 +257,4 @@
 
 .news-article-page {
     animation: fadeIn 0.6s ease-out;
-}
-
-.news-page {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    padding: 20px 0;
-}
-
-.page-header {
-    text-align: center;
-    padding: 40px 20px;
-    margin-bottom: 20px;
-}
-
-.page-header h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, #1976d2 0%, #1565c0 50%, #0d47a1 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 15px;
-    letter-spacing: -1px;
-}
-
-.page-header p {
-    font-size: 1.2rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .page-header h1 {
-        font-size: 2.5rem;
-    }
-
-    .page-header p {
-        font-size: 1rem;
-        padding: 0 15px;
-    }
 }

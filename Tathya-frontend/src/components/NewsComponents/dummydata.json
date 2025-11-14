@@ -1,274 +1,406 @@
 {
-    "articles": [
+    "newsGroups": [
         {
-            "_id": {
-                "$oid": "69133c4c1e65c3775744760a"
-            },
-            "url": "https://english.dcnepal.com/2025/10/25/u-s-sanctions-on-russian-oil-firms",
-            "title": "U.S. Sanctions on Russian Oil Firms May Push India to Rethink Imports",
-            "category": "Politics",
-            "lead": "New Delhi, Oct 25: Analysts say that U.S. President Donald Trump's sanctions on Russian oil companies could force India to reconsider its energy import strategy amid rising global tensions.",
-            "description": "New Delhi, Oct 25: Analysts say that U.S. President Donald Trump's sanctions on Russian oil companies have created significant challenges for India's energy sector. The sanctions target major Russian energy companies that have been key suppliers to India since the Ukraine conflict began. Indian officials are now exploring alternative energy sources while balancing diplomatic relations with both Washington and Moscow. The move could reshape India's energy landscape and affect global oil markets significantly.",
-            "postedAt": "2025/10/25",
-            "imageUrl": "https://english.dcnepal.com/wp-content/uploads/2025/10/modi-putin.jpg",
-            "language": "English",
-            "newsPortal": "DC Nepal",
-            "metrics": {
-                "readTime": "3 min",
-                "wordCount": 245,
-                "sentiment": "neutral"
-            },
-            "summary": "U.S. President Donald Trump's sanctions on two major Russian oil companies could force India to reconsider its energy import strategy.",
-            "keyPoints": [
-                "U.S. imposes new sanctions on Russian oil companies supplying to India",
-                "India has been major buyer of Russian oil since Ukraine conflict began",
-                "Sanctions could disrupt India's energy supply chain significantly",
-                "Indian government exploring alternative energy sources and suppliers",
-                "Move expected to reshape global oil markets and trade patterns"
-            ],
-            "alternativeSources": {
-                "eKantipur": {
-                    "url": "https://ekantipur.com/politics/2025/10/25/us-sanctions-russian-oil",
-                    "title": "अमेरिकी प्रतिबन्धले भारतीय तेल आयातमा असर",
-                    "description": "काठमाडौं, कार्तिक ९ - अमेरिकी राष्ट्रपति डोनाल्ड ट्रम्पको रूसी तेल कम्पनीहरूमाथिको प्रतिबन्धले भारतको ऊर्जा नीतिमा महत्वपूर्ण प्रभाव पार्ने विश्लेषकहरूको भनाइ छ।",
-                    "imageUrl": "https://ekantipur.com/uploads/2025/10/us-russia-sanctions.jpg"
+            "groupId": "69156d6c765f47e99d0c689b",
+            "news": [
+                {
+                    "id": "69133c4c1e65c3775744760b",
+                    "url": "https://thehimalayantimes.com/kathmandu/nepal-earthquake-preparedness",
+                    "title": "Nepal Launches New Earthquake Preparedness Initiative Following Recent Tremors",
+                    "category": "National",
+                    "lead": "Kathmandu, Nov 10: Government announces comprehensive earthquake preparedness program after series of tremors across the country.",
+                    "description": "Kathmandu, Nov 10: The Nepal government has launched a nationwide earthquake preparedness initiative following a series of moderate tremors that shook various parts of the country last week. The program includes early warning systems, community training, and infrastructure assessment. Prime Minister announced additional funding for earthquake-resistant construction and emergency response capabilities.",
+                    "postedAt": "2025-11-10",
+                    "imageUrl": "https://thehimalayantimes.com/wp-content/uploads/2025/11/earthquake-drill.jpg",
+                    "language": "English",
+                    "newsPortal": "The Himalayan Times",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 31,
+                            "downvote": 4
+                        },
+                        "politicalBiasness": {
+                            "upvote": 25,
+                            "downvote": 8
+                        },
+                        "credibility": {
+                            "upvote": 48,
+                            "downvote": 3
+                        },
+                        "relevance": {
+                            "upvote": 52,
+                            "downvote": 2
+                        }
+                    },
+                    "summary": "Nepal government launches comprehensive earthquake preparedness program following recent seismic activity across the nation."
                 },
-                "Kathmandu Post": {
-                    "url": "https://kathmandupost.com/world/2025/10/25/us-sanctions-impact-india-oil",
-                    "title": "US sanctions on Russian oil firms to impact India's energy security",
-                    "description": "New Delhi - The latest round of US sanctions targeting Russian oil companies is expected to force India to reassess its energy import portfolio, according to energy analysts.",
-                    "imageUrl": "https://kathmandupost.com/uploads/2025/10/india-russia-oil.jpg"
-                },
-                "Online Khabar": {
-                    "url": "https://onlinekhabar.com/2025/10/1234567",
-                    "title": "रुसी तेल कम्पनीमाथि अमेरिकी प्रतिबन्ध, भारतमा असर",
-                    "description": "अमेरिकाले रुसी तेल कम्पनीहरूमाथि लगाएको नयाँ प्रतिबन्धले भारतको ऊर्जा आपूर्ति शृङ्खलामा प्रभाव पार्ने विज्ञहरूको अनुमान छ।",
-                    "imageUrl": "https://onlinekhabar.com/uploads/2025/10/oil-sanctions.jpg"
-                },
-                "Primetime News": {
-                    "url": "https://primetimenews.com.np/world/us-russia-oil-sanctions",
-                    "title": "भारतीय ऊर्जा नीतिमा अमेरिकी प्रतिबन्धको प्रभाव",
-                    "description": "प्राइमटाइम न्यूज, काठमाडौं - अमेरिकाको रूसी तेल कम्पनीमाथिको प्रतिबन्धले भारतको ऊर्जा सुरक्षामा नयाँ चुनौती थपेको छ।",
-                    "imageUrl": "https://primetimenews.com.np/uploads/oil-crisis.jpg"
-                }
-            }
-        },
-        {
-            "_id": {
-                "$oid": "69133c4c1e65c3775744760b"
-            },
-            "url": "https://thehimalayantimes.com/kathmandu/nepal-earthquake-preparedness",
-            "title": "Nepal Launches New Earthquake Preparedness Initiative Following Recent Tremors",
-            "category": "National",
-            "lead": "Kathmandu, Nov 10: Government announces comprehensive earthquake preparedness program after series of tremors across the country.",
-            "description": "Kathmandu, Nov 10: The Nepal government has launched a nationwide earthquake preparedness initiative following a series of moderate tremors that shook various parts of the country last week. The program includes early warning systems, community training, and infrastructure assessment. Prime Minister announced additional funding for earthquake-resistant construction and emergency response capabilities.",
-            "postedAt": "2025/11/10",
-            "imageUrl": "https://thehimalayantimes.com/wp-content/uploads/2025/11/earthquake-drill.jpg",
-            "language": "English",
-            "newsPortal": "The Himalayan Times",
-            "metrics": {
-                "readTime": "2 min",
-                "wordCount": 189,
-                "sentiment": "neutral"
-            },
-            "summary": "Nepal government launches comprehensive earthquake preparedness program following recent seismic activity across the nation.",
-            "keyPoints": [
-                "New earthquake preparedness initiative launched by Nepal government",
-                "Program includes early warning systems and community training",
-                "Recent tremors prompt increased focus on disaster preparedness",
-                "Additional funding allocated for earthquake-resistant infrastructure",
-                "Emergency response capabilities to be enhanced nationwide"
-            ],
-            "alternativeSources": {
-                "eKantipur": {
+                {
+                    "id": "69133c4c1e65c3775744760b1",
                     "url": "https://ekantipur.com/national/2025/11/10/earthquake-preparedness",
                     "title": "भूकम्प पूर्वतयारी कार्यक्रम सुरु, सरकारले थाल्यो नयाँ योजना",
-                    "description": "काठमाडौं, कार्तिक २५ - हालैका भूकम्पीय गतिविधिपछि सरकारले राष्ट्रव्यापी भूकम्प पूर्वतयारी कार्यक्रम सुरु गरेको छ।",
-                    "imageUrl": "https://ekantipur.com/uploads/2025/11/earthquake-drill-nepal.jpg"
+                    "category": "National",
+                    "lead": "काठमाडौं, कार्तिक २५ - हालैका भूकम्पीय गतिविधिपछि सरकारले राष्ट्रव्यापी भूकम्प पूर्वतयारी कार्यक्रम सुरु गरेको छ।",
+                    "description": "काठमाडौं, कार्तिक २५ - हालैका भूकम्पीय गतिविधिपछि सरकारले राष्ट्रव्यापी भूकम्प पूर्वतयारी कार्यक्रम सुरु गरेको छ। यो कार्यक्रममा पूर्व चेतावनी प्रणाली, सामुदायिक तालिम र पूर्वाधार मूल्यांकन समावेश छ।",
+                    "postedAt": "2025-11-10",
+                    "imageUrl": "https://ekantipur.com/uploads/2025/11/earthquake-drill-nepal.jpg",
+                    "language": "Nepali",
+                    "newsPortal": "eKantipur",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 27,
+                            "downvote": 6
+                        },
+                        "politicalBiasness": {
+                            "upvote": 22,
+                            "downvote": 11
+                        },
+                        "credibility": {
+                            "upvote": 43,
+                            "downvote": 5
+                        },
+                        "relevance": {
+                            "upvote": 49,
+                            "downvote": 4
+                        }
+                    },
+                    "summary": "सरकारले राष्ट्रव्यापी भूकम्प पूर्वतयारी कार्यक्रम शुरु गरेको छ।"
                 },
-                "DC Nepal": {
+                {
+                    "id": "69133c4c1e65c3775744760b2",
                     "url": "https://english.dcnepal.com/national/earthquake-preparedness-nepal",
                     "title": "Government rolls out earthquake preparedness campaign",
-                    "description": "KATHMANDU - Following recent seismic activities, the government has initiated a comprehensive earthquake preparedness program nationwide.",
-                    "imageUrl": "https://english.dcnepal.com/uploads/earthquake-safety.jpg"
-                },
-                "Online Khabar": {
-                    "url": "https://onlinekhabar.com/2025/11/1234568",
-                    "title": "भूकम्पको जोखिम कम गर्न सरकारी पहल",
-                    "description": "हालैका भुइँचालोका कारण सरकारले भूकम्प जोखिम न्यूनीकरणका लागि नयाँ कार्यक्रम ल्याएको छ।",
-                    "imageUrl": "https://onlinekhabar.com/uploads/2025/11/earthquake-drill.jpg"
-                },
-                "Primetime News": {
-                    "url": "https://primetimenews.com.np/national/earthquake-safety-program",
-                    "title": "भूकम्प सुरक्षा कार्यक्रम शुरु, समुदायिक तालिम हुने",
-                    "description": "प्राइमटाइम न्यूज - भूकम्पको जोखिमलाई मध्यनजर गर्दै सरकारले व्यापक सुरक्षा कार्यक्रम शुरु गरेको छ।",
-                    "imageUrl": "https://primetimenews.com.np/uploads/earthquake-preparedness.jpg"
+                    "category": "National",
+                    "lead": "KATHMANDU - Following recent seismic activities, the government has initiated a comprehensive earthquake preparedness program nationwide.",
+                    "description": "KATHMANDU - Following recent seismic activities, the government has initiated a comprehensive earthquake preparedness program nationwide. The initiative focuses on strengthening early warning systems and enhancing community resilience against future earthquakes.",
+                    "postedAt": "2025-11-10",
+                    "imageUrl": "https://english.dcnepal.com/uploads/earthquake-safety.jpg",
+                    "language": "English",
+                    "newsPortal": "DC Nepal",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 29,
+                            "downvote": 5
+                        },
+                        "politicalBiasness": {
+                            "upvote": 26,
+                            "downvote": 7
+                        },
+                        "credibility": {
+                            "upvote": 45,
+                            "downvote": 4
+                        },
+                        "relevance": {
+                            "upvote": 50,
+                            "downvote": 3
+                        }
+                    },
+                    "summary": "Government initiates comprehensive earthquake preparedness program following recent seismic activities."
                 }
-            }
+            ],
+            "sources": ["The Himalayan Times", "eKantipur", "DC Nepal"]
         },
         {
-            "_id": {
-                "$oid": "69133c4c1e65c3775744760c"
-            },
-            "url": "https://ekantipur.com/business/tourism-recovery-post-pandemic",
-            "title": "Nepal's Tourism Industry Shows Strong Recovery Signs Post-Pandemic",
-            "category": "Business",
-            "lead": "Kathmandu, Nov 9: Tourist arrivals increase by 45% compared to last year, signaling robust recovery in Nepal's tourism sector.",
-            "description": "Kathmandu, Nov 9: Nepal's tourism industry is showing remarkable recovery with tourist arrivals increasing by 45% compared to the same period last year. The Nepal Tourism Board reports that both domestic and international tourism have exceeded pre-pandemic projections. Mountain climbing, trekking, and cultural tours are leading the recovery with strong bookings for the upcoming peak season.",
-            "postedAt": "2025/11/09",
-            "imageUrl": "https://ekantipur.com/wp-content/uploads/2025/11/everest-base-camp.jpg",
-            "language": "English",
-            "newsPortal": "eKantipur",
-            "metrics": {
-                "readTime": "4 min",
-                "wordCount": 298,
-                "sentiment": "positive"
-            },
-            "summary": "Nepal's tourism sector demonstrates strong recovery with 45% increase in tourist arrivals compared to previous year.",
-            "keyPoints": [
-                "Tourist arrivals up 45% compared to last year's figures",
-                "Both domestic and international tourism exceeding projections",
-                "Mountain climbing and trekking leading the recovery trend",
-                "Strong bookings reported for upcoming peak tourism season",
-                "Cultural tours and adventure tourism showing particular growth"
-            ],
-            "alternativeSources": {
-                "Kathmandu Post": {
+            "groupId": "69156d6c765f47e99d0c689c",
+            "news": [
+                {
+                    "id": "69133c4c1e65c3775744760c",
+                    "url": "https://ekantipur.com/business/tourism-recovery-post-pandemic",
+                    "title": "Nepal's Tourism Industry Shows Strong Recovery Signs Post-Pandemic",
+                    "category": "Business",
+                    "lead": "Kathmandu, Nov 9: Tourist arrivals increase by 45% compared to last year, signaling robust recovery in Nepal's tourism sector.",
+                    "description": "Kathmandu, Nov 9: Nepal's tourism industry is showing remarkable recovery with tourist arrivals increasing by 45% compared to the same period last year. The Nepal Tourism Board reports that both domestic and international tourism have exceeded pre-pandemic projections. Mountain climbing, trekking, and cultural tours are leading the recovery with strong bookings for the upcoming peak season.",
+                    "postedAt": "2025-11-09",
+                    "imageUrl": "https://ekantipur.com/wp-content/uploads/2025/11/everest-base-camp.jpg",
+                    "language": "English",
+                    "newsPortal": "eKantipur",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 35,
+                            "downvote": 3
+                        },
+                        "politicalBiasness": {
+                            "upvote": 28,
+                            "downvote": 5
+                        },
+                        "credibility": {
+                            "upvote": 52,
+                            "downvote": 2
+                        },
+                        "relevance": {
+                            "upvote": 47,
+                            "downvote": 4
+                        }
+                    },
+                    "summary": "Nepal's tourism sector demonstrates strong recovery with 45% increase in tourist arrivals compared to previous year."
+                },
+                {
+                    "id": "69133c4c1e65c3775744760c1",
                     "url": "https://kathmandupost.com/money/2025/11/09/tourism-sector-recovery",
                     "title": "Tourism bounces back with 45% growth in arrivals",
-                    "description": "The tourism sector is witnessing unprecedented recovery with international arrivals surging by 45 percent compared to last year.",
-                    "imageUrl": "https://kathmandupost.com/uploads/2025/11/tourist-everest.jpg"
+                    "category": "Business",
+                    "lead": "The tourism sector is witnessing unprecedented recovery with international arrivals surging by 45 percent compared to last year.",
+                    "description": "The tourism sector is witnessing unprecedented recovery with international arrivals surging by 45 percent compared to last year. Mountain climbing, trekking, and cultural tours are leading the recovery with strong bookings for the upcoming peak season.",
+                    "postedAt": "2025-11-09",
+                    "imageUrl": "https://kathmandupost.com/uploads/2025/11/tourist-everest.jpg",
+                    "language": "English",
+                    "newsPortal": "Kathmandu Post",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 32,
+                            "downvote": 4
+                        },
+                        "politicalBiasness": {
+                            "upvote": 24,
+                            "downvote": 8
+                        },
+                        "credibility": {
+                            "upvote": 48,
+                            "downvote": 3
+                        },
+                        "relevance": {
+                            "upvote": 44,
+                            "downvote": 5
+                        }
+                    },
+                    "summary": "Tourism industry stakeholders report significant improvement with visitor numbers exceeding pre-pandemic levels."
                 },
-                "DC Nepal": {
+                {
+                    "id": "69133c4c1e65c3775744760c2",
                     "url": "https://english.dcnepal.com/business/tourism-recovery-2025",
                     "title": "Nepal tourism sees remarkable post-pandemic recovery",
-                    "description": "KATHMANDU - Tourism industry stakeholders report significant improvement with visitor numbers exceeding pre-pandemic levels.",
-                    "imageUrl": "https://english.dcnepal.com/uploads/tourism-growth.jpg"
-                },
-                "Online Khabar": {
-                    "url": "https://onlinekhabar.com/2025/11/1234569",
-                    "title": "पर्यटन क्षेत्रमा उल्लेखनीय सुधार, ४५ प्रतिशतले बढे पर्यटक",
-                    "description": "नेपालको पर्यटन क्षेत्रले कोभिडपछि उल्लेखनीय सुधार देखाएको छ भने पर्यटक आगमनमा ४५ प्रतिशतको वृद्धि भएको छ।",
-                    "imageUrl": "https://onlinekhabar.com/uploads/2025/11/tourism-nepal.jpg"
-                },
-                "Primetime News": {
-                    "url": "https://primetimenews.com.np/business/tourism-growth",
-                    "title": "पर्यटन उद्योगको शक्तिशाली पुनरुत्थान",
-                    "description": "प्राइमटाइम न्यूज - महामारीपछि नेपालको पर्यटन उद्योगले उत्साहजनक प्रगति देखाएको छ।",
-                    "imageUrl": "https://primetimenews.com.np/uploads/tourism-recovery.jpg"
+                    "category": "Business",
+                    "lead": "KATHMANDU - Tourism industry stakeholders report significant improvement with visitor numbers exceeding pre-pandemic levels.",
+                    "description": "KATHMANDU - Tourism industry stakeholders report significant improvement with visitor numbers exceeding pre-pandemic levels. The recovery has been driven by strong domestic tourism and increasing international arrivals.",
+                    "postedAt": "2025-11-09",
+                    "imageUrl": "https://english.dcnepal.com/uploads/tourism-growth.jpg",
+                    "language": "English",
+                    "newsPortal": "DC Nepal",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 30,
+                            "downvote": 5
+                        },
+                        "politicalBiasness": {
+                            "upvote": 26,
+                            "downvote": 6
+                        },
+                        "credibility": {
+                            "upvote": 46,
+                            "downvote": 4
+                        },
+                        "relevance": {
+                            "upvote": 42,
+                            "downvote": 6
+                        }
+                    },
+                    "summary": "Tourism industry reports remarkable post-pandemic recovery with visitor numbers exceeding expectations."
                 }
-            }
+            ],
+            "sources": ["eKantipur", "Kathmandu Post", "DC Nepal"]
         },
         {
-            "_id": {
-                "$oid": "69133c4c1e65c3775744760d"
-            },
-            "url": "https://onlinekhabar.com/tech/ai-adoption-nepal",
-            "title": "Nepal's Tech Sector Embraces AI Revolution with New Innovation Hub",
-            "category": "Technology",
-            "lead": "Kathmandu, Nov 8: New AI innovation hub established to support local tech startups and promote artificial intelligence adoption.",
-            "description": "Kathmandu, Nov 8: Nepal has opened its first dedicated AI innovation hub in the capital, marking a significant milestone in the country's technological advancement. The facility will provide resources, training, and support for local tech startups focusing on artificial intelligence solutions. Government officials emphasize the importance of AI in driving economic growth and digital transformation across various sectors.",
-            "postedAt": "2025/11/08",
-            "imageUrl": "https://onlinekhabar.com/wp-content/uploads/2025/11/ai-hub-kathmandu.jpg",
-            "language": "English",
-            "newsPortal": "Online Khabar",
-            "metrics": {
-                "readTime": "3 min",
-                "wordCount": 221,
-                "sentiment": "positive"
-            },
-            "summary": "Nepal establishes first AI innovation hub to support tech startups and promote artificial intelligence adoption nationwide.",
-            "keyPoints": [
-                "First dedicated AI innovation hub opens in Kathmandu",
-                "Facility to support local tech startups and entrepreneurs",
-                "Focus on artificial intelligence solutions development",
-                "Government emphasizes AI's role in economic growth",
-                "Digital transformation initiatives across various sectors planned"
-            ],
-            "alternativeSources": {
-                "eKantipur": {
+            "groupId": "69156d6c765f47e99d0c689d",
+            "news": [
+                {
+                    "id": "69133c4c1e65c3775744760d",
+                    "url": "https://onlinekhabar.com/tech/ai-adoption-nepal",
+                    "title": "Nepal's Tech Sector Embraces AI Revolution with New Innovation Hub",
+                    "category": "Technology",
+                    "lead": "Kathmandu, Nov 8: New AI innovation hub established to support local tech startups and promote artificial intelligence adoption.",
+                    "description": "Kathmandu, Nov 8: Nepal has opened its first dedicated AI innovation hub in the capital, marking a significant milestone in the country's technological advancement. The facility will provide resources, training, and support for local tech startups focusing on artificial intelligence solutions. Government officials emphasize the importance of AI in driving economic growth and digital transformation across various sectors.",
+                    "postedAt": "2025-11-08",
+                    "imageUrl": "https://onlinekhabar.com/wp-content/uploads/2025/11/ai-hub-kathmandu.jpg",
+                    "language": "English",
+                    "newsPortal": "Online Khabar",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 28,
+                            "downvote": 6
+                        },
+                        "politicalBiasness": {
+                            "upvote": 22,
+                            "downvote": 8
+                        },
+                        "credibility": {
+                            "upvote": 41,
+                            "downvote": 5
+                        },
+                        "relevance": {
+                            "upvote": 45,
+                            "downvote": 3
+                        }
+                    },
+                    "summary": "Nepal establishes first AI innovation hub to support tech startups and promote artificial intelligence adoption nationwide."
+                },
+                {
+                    "id": "69133c4c1e65c3775744760d1",
                     "url": "https://ekantipur.com/technology/2025/11/08/ai-innovation-hub",
                     "title": "एआई इनोभेसन हब स्थापना, प्रविधि क्षेत्रमा नयाँ युग",
-                    "description": "काठमाडौंमा पहिलो कृत्रिम बुद्धिमत्ता केन्द्र स्थापना भएसँगै नेपालको प्रविधि क्षेत्रमा नयाँ अध्याय सुरु भएको छ।",
-                    "imageUrl": "https://ekantipur.com/uploads/2025/11/ai-center-ktm.jpg"
+                    "category": "Technology",
+                    "lead": "काठमाडौंमा पहिलो कृत्रिम बुद्धिमत्ता केन्द्र स्थापना भएसँगै नेपालको प्रविधि क्षेत्रमा नयाँ अध्याय सुरु भएको छ।",
+                    "description": "काठमाडौंमा पहिलो कृत्रिम बुद्धिमत्ता केन्द्र स्थापना भएसँगै नेपालको प्रविधि क्षेत्रमा नयाँ अध्याय सुरु भएको छ। यो केन्द्रले स्थानीय प्रविधि स्टार्टअपहरूलाई सहयोग गर्नेछ।",
+                    "postedAt": "2025-11-08",
+                    "imageUrl": "https://ekantipur.com/uploads/2025/11/ai-center-ktm.jpg",
+                    "language": "Nepali",
+                    "newsPortal": "eKantipur",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 25,
+                            "downvote": 8
+                        },
+                        "politicalBiasness": {
+                            "upvote": 20,
+                            "downvote": 10
+                        },
+                        "credibility": {
+                            "upvote": 38,
+                            "downvote": 7
+                        },
+                        "relevance": {
+                            "upvote": 42,
+                            "downvote": 5
+                        }
+                    },
+                    "summary": "काठमाडौंमा पहिलो एआई केन्द्र स्थापना भएको छ।"
                 },
-                "Kathmandu Post": {
+                {
+                    "id": "69133c4c1e65c3775744760d2",
                     "url": "https://kathmandupost.com/science-technology/2025/11/08/ai-hub-nepal",
                     "title": "Nepal opens first artificial intelligence innovation centre",
-                    "description": "A new AI innovation hub has been inaugurated in Kathmandu to foster technological advancement and support startups.",
-                    "imageUrl": "https://kathmandupost.com/uploads/2025/11/ai-innovation.jpg"
-                },
-                "DC Nepal": {
-                    "url": "https://english.dcnepal.com/technology/ai-hub-opens-kathmandu",
-                    "title": "AI innovation hub launched to boost tech ecosystem",
-                    "description": "KATHMANDU - The country's first dedicated artificial intelligence hub aims to accelerate digital transformation.",
-                    "imageUrl": "https://english.dcnepal.com/uploads/ai-technology.jpg"
-                },
-                "Primetime News": {
-                    "url": "https://primetimenews.com.np/technology/ai-innovation-center",
-                    "title": "एआई केन्द्र स्थापना, डिजिटल क्रान्तिको सुरुवात",
-                    "description": "प्राइमटाइम न्यूज - नेपालमा पहिलो एआई केन्द्र स्थापनाले प्रविधि क्षेत्रमा नयाँ आशा जगाएको छ।",
-                    "imageUrl": "https://primetimenews.com.np/uploads/ai-center.jpg"
+                    "category": "Technology",
+                    "lead": "A new AI innovation hub has been inaugurated in Kathmandu to foster technological advancement and support startups.",
+                    "description": "A new AI innovation hub has been inaugurated in Kathmandu to foster technological advancement and support startups. The facility is expected to become a catalyst for Nepal's digital transformation journey.",
+                    "postedAt": "2025-11-08",
+                    "imageUrl": "https://kathmandupost.com/uploads/2025/11/ai-innovation.jpg",
+                    "language": "English",
+                    "newsPortal": "Kathmandu Post",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 31,
+                            "downvote": 4
+                        },
+                        "politicalBiasness": {
+                            "upvote": 24,
+                            "downvote": 6
+                        },
+                        "credibility": {
+                            "upvote": 44,
+                            "downvote": 3
+                        },
+                        "relevance": {
+                            "upvote": 47,
+                            "downvote": 2
+                        }
+                    },
+                    "summary": "New AI innovation hub inaugurated in Kathmandu to foster technological advancement and support startups."
                 }
-            }
+            ],
+            "sources": ["Online Khabar", "eKantipur", "Kathmandu Post"]
         },
         {
-            "_id": {
-                "$oid": "69133c4c1e65c3775744760e"
-            },
-            "url": "https://nepalnews.com/climate/renewable-energy-progress",
-            "title": "Nepal Achieves 95% Renewable Energy Target Ahead of Schedule",
-            "category": "Environment",
-            "lead": "Kathmandu, Nov 7: Country surpasses renewable energy goals with hydropower and solar installations exceeding expectations.",
-            "description": "Nepal has achieved 95% renewable energy generation, surpassing its national target three years ahead of schedule. The milestone was reached through significant investments in hydropower projects and solar installations across rural areas. Energy Minister credited public-private partnerships and international support for the remarkable achievement in sustainable energy transition.",
-            "postedAt": "2025/11/07",
-            "imageUrl": "https://nepalnews.com/wp-content/uploads/2025/11/solar-hydro-nepal.jpg",
-            "language": "English",
-            "newsPortal": "Nepal News",
-            "metrics": {
-                "readTime": "3 min",
-                "wordCount": 267,
-                "sentiment": "positive"
-            },
-            "summary": "Nepal reaches 95% renewable energy generation, achieving national targets three years ahead of planned timeline.",
-            "keyPoints": [
-                "95% renewable energy generation achieved ahead of schedule",
-                "Hydropower and solar installations exceed initial expectations",
-                "Significant progress in sustainable energy transition",
-                "Public-private partnerships key to success",
-                "International support crucial for renewable energy projects"
-            ],
-            "alternativeSources": {
-                "eKantipur": {
+            "groupId": "69156d6c765f47e99d0c689e",
+            "news": [
+                {
+                    "id": "69133c4c1e65c3775744760e",
+                    "url": "https://nepalnews.com/climate/renewable-energy-progress",
+                    "title": "Nepal Achieves 95% Renewable Energy Target Ahead of Schedule",
+                    "category": "Environment",
+                    "lead": "Kathmandu, Nov 7: Country surpasses renewable energy goals with hydropower and solar installations exceeding expectations.",
+                    "description": "Nepal has achieved 95% renewable energy generation, surpassing its national target three years ahead of schedule. The milestone was reached through significant investments in hydropower projects and solar installations across rural areas. Energy Minister credited public-private partnerships and international support for the remarkable achievement in sustainable energy transition.",
+                    "postedAt": "2025-11-07",
+                    "imageUrl": "https://nepalnews.com/wp-content/uploads/2025/11/solar-hydro-nepal.jpg",
+                    "language": "English",
+                    "newsPortal": "Nepal News",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 38,
+                            "downvote": 2
+                        },
+                        "politicalBiasness": {
+                            "upvote": 30,
+                            "downvote": 4
+                        },
+                        "credibility": {
+                            "upvote": 55,
+                            "downvote": 1
+                        },
+                        "relevance": {
+                            "upvote": 51,
+                            "downvote": 3
+                        }
+                    },
+                    "summary": "Nepal reaches 95% renewable energy generation, achieving national targets three years ahead of planned timeline."
+                },
+                {
+                    "id": "69133c4c1e65c3775744760e1",
                     "url": "https://ekantipur.com/environment/2025/11/07/renewable-energy-target",
                     "title": "नेपालले नवीकरणीय ऊर्जाको लक्ष्य समयअघि नै हासिल",
-                    "description": "नेपालले नवीकरणीय ऊर्जाको ९५ प्रतिशत लक्ष्य तोकिएको समयभन्दा तीन वर्ष पहिले नै हासिल गरेको छ।",
-                    "imageUrl": "https://ekantipur.com/uploads/2025/11/renewable-energy.jpg"
+                    "category": "Environment",
+                    "lead": "नेपालले नवीकरणीय ऊर्जाको ९५ प्रतिशत लक्ष्य तोकिएको समयभन्दा तीन वर्ष पहिले नै हासिल गरेको छ।",
+                    "description": "नेपालले नवीकरणीय ऊर्जाको ९५ प्रतिशत लक्ष्य तोकिएको समयभन्दा तीन वर्ष पहिले नै हासिल गरेको छ। जल विद्युत र सौर्य ऊर्जामा गरिएको लगानीले यो उपलब्धि सम्भव भएको हो।",
+                    "postedAt": "2025-11-07",
+                    "imageUrl": "https://ekantipur.com/uploads/2025/11/renewable-energy.jpg",
+                    "language": "Nepali",
+                    "newsPortal": "eKantipur",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 34,
+                            "downvote": 4
+                        },
+                        "politicalBiasness": {
+                            "upvote": 27,
+                            "downvote": 6
+                        },
+                        "credibility": {
+                            "upvote": 50,
+                            "downvote": 3
+                        },
+                        "relevance": {
+                            "upvote": 48,
+                            "downvote": 4
+                        }
+                    },
+                    "summary": "नेपालले नवीकरणीय ऊर्जाको लक्ष्य समयअघि नै पूरा गरेको छ।"
                 },
-                "Kathmandu Post": {
+                {
+                    "id": "69133c4c1e65c3775744760e2",
                     "url": "https://kathmandupost.com/climate/2025/11/07/renewable-energy-milestone",
                     "title": "Nepal hits renewable energy target three years early",
-                    "description": "The country has achieved its ambitious renewable energy goal of 95 percent generation ahead of the 2028 deadline.",
-                    "imageUrl": "https://kathmandupost.com/uploads/2025/11/green-energy.jpg"
-                },
-                "DC Nepal": {
-                    "url": "https://english.dcnepal.com/environment/renewable-energy-success",
-                    "title": "Nepal exceeds renewable energy expectations",
-                    "description": "KATHMANDU - The nation has surpassed its renewable energy targets with significant hydropower and solar achievements.",
-                    "imageUrl": "https://english.dcnepal.com/uploads/clean-energy.jpg"
-                },
-                "Primetime News": {
-                    "url": "https://primetimenews.com.np/environment/renewable-energy-achievement",
-                    "title": "नवीकरणीय ऊर्जामा नेपालको ऐतिहासिक उपलब्धि",
-                    "description": "प्राइमटाइम न्यूज - नेपालले नवीकरणीय ऊर्जाको क्षेत्रमा विश्वमा उदाहरणीय उपलब्धि हासिल गरेको छ।",
-                    "imageUrl": "https://primetimenews.com.np/uploads/green-nepal.jpg"
+                    "category": "Environment",
+                    "lead": "The country has achieved its ambitious renewable energy goal of 95 percent generation ahead of the 2028 deadline.",
+                    "description": "The country has achieved its ambitious renewable energy goal of 95 percent generation ahead of the 2028 deadline. This success is attributed to strategic investments in hydropower and solar energy infrastructure.",
+                    "postedAt": "2025-11-07",
+                    "imageUrl": "https://kathmandupost.com/uploads/2025/11/green-energy.jpg",
+                    "language": "English",
+                    "newsPortal": "Kathmandu Post",
+                    "metrics": {
+                        "depthOfReporting": {
+                            "upvote": 36,
+                            "downvote": 3
+                        },
+                        "politicalBiasness": {
+                            "upvote": 29,
+                            "downvote": 5
+                        },
+                        "credibility": {
+                            "upvote": 52,
+                            "downvote": 2
+                        },
+                        "relevance": {
+                            "upvote": 49,
+                            "downvote": 3
+                        }
+                    },
+                    "summary": "Nepal achieves ambitious renewable energy goal of 95% generation three years ahead of deadline."
                 }
-            }
+            ],
+            "sources": ["Nepal News", "eKantipur", "Kathmandu Post"]
         }
     ],
     "metadata": {
-        "totalArticles": 5,
-        "lastUpdated": "2025-11-12T10:30:00Z",
+        "totalNewsGroups": 5,
+        "totalArticles": 17,
+        "lastUpdated": "2025-11-13T10:30:00Z",
         "sources": [
             "eKantipur",
             "Kathmandu Post",

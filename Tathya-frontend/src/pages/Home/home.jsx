@@ -2,15 +2,16 @@ import React from 'react';
 import NewsPreview from '../../components/newsPreview/newspreview';
 import { useNavigate } from 'react-router-dom';
 import ContentLayout from '../../layouts/mainContents/contentLayout';
-import '../../index.css';
 import MostRead from '../../layouts/extraContent/mostRead';
 import ExtraLayout from '../../layouts/extraContent/extraLayout';
+import '../../index.css';
 
 function Home({ selectedCategory, onCategoryChange }) {
     const navigate = useNavigate();
 
-    const handleArticleSelect = (article) => {
-        navigate(`/news/${article._id.$oid}`);
+    const handleArticleSelect = (newsGroup) => {
+        // Navigate to the news group page using groupId
+        navigate(`/news/${newsGroup.groupId}`);
     };
 
     return (
@@ -20,17 +21,20 @@ function Home({ selectedCategory, onCategoryChange }) {
             <ExtraLayout />
 
             {/* News Section */}
-            {/* <div className="home-news-section">
+            <div className="home-news-section">
                 <div className="section-header">
-                    <h2>Latest News</h2>
-                    <p>Stay updated with the latest happenings</p>
+                    <h2>Latest News Coverage</h2>
+                    <p>
+                        Compare perspectives from multiple sources on the same
+                        story
+                    </p>
                 </div>
                 <NewsPreview
                     onArticleSelect={handleArticleSelect}
                     selectedCategory={selectedCategory}
                     onCategoryChange={onCategoryChange}
                 />
-            </div> */}
+            </div>
         </div>
     );
 }
