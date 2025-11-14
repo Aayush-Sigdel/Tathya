@@ -1,9 +1,11 @@
 .header-main {
     display: flex;
     width: 100vw;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0% 22px 0% 22px;
     align-items: center;
-    min-height: 64px;
+    min-height: 52px;
+    background-color: aliceblue;
     box-sizing: border-box;
 }
 
@@ -22,7 +24,7 @@
 }
 
 .header-main > div {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: bold;
     letter-spacing: 2px;
 }
