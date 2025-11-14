@@ -1,76 +1,78 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './MostRead.module.css';
+import dummyData from '../../components/NewsComponents/dummydata.json';
 
 export default function MostRead() {
-  const articles = [
-    {
-      id: 1,
-      title: "Trump says he may give Hungary an exemption on Russian oil sanctions",
-      url: "#"
-    },
-    {
-      id: 2,
-      title: "DNA pioneer James Watson dies at 97",
-      url: "#"
-    },
-    {
-      id: 3,
-      title: "Supreme Court rules full Snap food benefits can be temporarily halted",
-      url: "#"
-    },
-    {
-      id: 4,
-      title: "Thousands of US flights cancelled or delayed over government shutdown cuts",
-      url: "#"
-    },
-    {
-      id: 5,
-      title: "What does Elon Musk do with all his money?",
-      url: "#"
-    },
-    {
-      id: 6,
-      title: "'Netflix': the peregrine falcon livestream that has Australians glued to their screens",
-      url: "#"
-    },
-    {
-      id: 7,
-      title: "A 20-minute date with a Tinder predator destroyed my life for years",
-      url: "#"
-    },
-    {
-      id: 8,
-      title: "Blame game over Air India crash goes on",
-      url: "#"
-    },
-    {
-      id: 9,
-      title: "Why tech giants are offering premium AI tools to millions of Indians for free",
-      url: "#"
-    },
-    {
-      id: 10,
-      title: "Multiple people fall ill after package delivered to Air Force One base",
-      url: "#"
-    }
-  ];
+    const newsGroups = dummyData.newsGroups || [];
 
-  return (
-    <div className={styles['main-container']}>
-      <h2 className={styles['heading']}>MOST READ</h2>
-      <div className={styles['articles-grid']}>
-        {articles.map((article) => (
-          <Link 
-            key={article.id} 
-            to={article.url}
-            className={styles['article-item']}
-          >
-            <span className={styles['article-number']}>{article.id}</span>
-            <h3 className={styles['article-title']}>{article.title}</h3>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+    // Helper function to calculate popularity score based on total engagement
+    const calculatePopularityScore = (newsGroup) => {
+        const totalEngagement = newsGroup.news.reduce((sum, article) => {
+            const metrics = article.metrics || {};
+            const totalVotes = Object.values(metrics).reduce(
+                (voteSum, metric) => {
+                    const upvote = metric?.upvote || 0;
+                    const downvote = metric?.downvote || 0;
+                    return voteSum + upvote + downvote;
+                },
+                0
+            );
+            return sum + totalVotes;
+        }, 0);
+        return totalEngagement;
+    };
+
+    // Create articles array from news groups, sorted by popularity
+    const articles = newsGroups
+        .map((group, index) => {
+            const primaryArticle = group.news[0];
+            return {
+                id: index + 1, // Use sequential numbering for ranking
+                groupId: group.groupId,
+                title: primaryArticle.title,
+                url: `/news/${group.groupId}`,
+                popularityScore: calculatePopularityScore(group),
+            };
+        })
+        .sort((a, b) => b.popularityScore - a.popularityScore) // Sort by popularity
+        .map((article, index) => ({
+            ...article,
+            id: index + 1, // Re-number after sorting
+        }))
+        .slice(0, 10); // Take top 10
+
+    // If we have fewer than 10 articles, duplicate some to fill the list
+    const paddedArticles = [...articles];
+    while (paddedArticles.length < 10 && articles.length > 0) {
+        const originalLength = articles.length;
+        for (let i = 0; i < originalLength && paddedArticles.length < 10; i++) {
+            paddedArticles.push({
+                ...articles[i],
+                id: paddedArticles.length + 1,
+                title: articles[i].title + ' (Related Coverage)',
+            });
+        }
+    }
+
+    return (
+        <div className={styles['main-container']}>
+            <h2 className={styles['heading']}>MOST READ</h2>
+            <div className={styles['articles-grid']}>
+                {paddedArticles.map((article) => (
+                    <Link
+                        key={`${article.groupId}-${article.id}`}
+                        to={article.url}
+                        className={styles['article-item']}>
+                        <span className={styles['article-number']}>
+                            {article.id}
+                        </span>
+                        <h3 className={styles['article-title']}>
+                            {article.title}
+                        </h3>
+                    </Link>
+                ))}
+            </div>
+        </div>
+    );
 }

@@ -12,8 +12,6 @@ import Footer from './layouts/footer/footer';
 import News from './pages/NewsArticle/News';
 import Contact from './pages/Contact/Contact';
 import NewsCatagory from './layouts/NewsCatagory/newsCatagory';
-import Auth from './layouts/authentication/auth';
-import OTPModal from './layouts/authentication/otpModal';
 
 const App = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -32,9 +30,6 @@ const App = () => {
         <DotGridBackground className="container">
             <Header />
             <Navbar />
-            <ContentLayout />
-            <MostRead />
-            <ExtraLayout />
 
             {/* Show category filter only on relevant pages */}
             {showCategoryFilter && (
