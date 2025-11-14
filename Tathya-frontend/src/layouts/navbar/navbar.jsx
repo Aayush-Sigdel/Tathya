@@ -31,12 +31,12 @@ export default function Navbar() {
 
     return (
         <nav className={styles['main-nav-container']}>
-            <button
+            {/* <button
                 className={styles['menu-btn']}
                 onClick={toggleMobileMenu}
                 aria-label="Toggle mobile menu">
                 <Menu size={24} />
-            </button>
+            </button> */}
 
             <ul
                 className={`${styles['nav-links-container']} ${
@@ -64,16 +64,19 @@ export default function Navbar() {
             </ul>
 
             <div className={styles['nav-right-container']}>
-                <button
-                    className={styles['icon-btn']}
-                    aria-label="User profile">
-                    <User size={24} />
-                </button>
-                <button
+                <Link
+                    to="/profile">
+                        <button
+                            className={styles['icon-btn']}
+                            aria-label="User profile">
+                    <       User size={24} />
+                        </button>
+                </Link>
+                {/* <button
                     className={styles['icon-btn']}
                     aria-label="Search">
                     <Search size={24} />
-                </button>
+                </button> */}
             </div>
         </nav>
     );
