@@ -12,6 +12,11 @@ import Footer from './layouts/footer/footer';
 import News from './pages/NewsArticle/News';
 import Contact from './pages/Contact/Contact';
 import NewsCatagory from './layouts/NewsCatagory/newsCatagory';
+import MostRead from './layouts/extraContent/mostRead';
+import ContentLayout from './layouts/mainContents/contentLayout';
+import Auth from './layouts/authentication/auth';
+import OTPModal from './layouts/authentication/otpModal';
+import Profile from './layouts/profile/profile';
 
 const App = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -28,10 +33,10 @@ const App = () => {
 
     return (
         <DotGridBackground className="container">
-            <Header />
+            {/* <Header />
             <Navbar />
 
-            {/* Show category filter only on relevant pages */}
+            {/* Show category filter only on relevant pages 
             {showCategoryFilter && (
                 <NewsCatagory
                     selectedCategory={selectedCategory}
@@ -79,7 +84,8 @@ const App = () => {
                 </Routes>
             </div>
             <Footer />
-            {/* <Auth /> */}
+            <Auth /> */}
+            <Profile />
         </DotGridBackground>
     );
 };
