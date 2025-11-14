@@ -16,6 +16,8 @@ import MostRead from './layouts/extraContent/mostRead';
 import News from './pages/NewsArticle/News';
 import Contact from './pages/Contact/Contact'; // Fixed import
 import NewsCatagory from './layouts/NewsCatagory/newsCatagory';
+import Auth from './layouts/authentication/auth';
+import OTPModal from './layouts/authentication/otpModal';
 
 const App = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -35,8 +37,6 @@ const App = () => {
             <ContentLayout />
             <MostRead />
             <ExtraLayout />
-
-            <Footer />
 
             {/* Show category filter only on relevant pages */}
             {showCategoryFilter && (
@@ -86,6 +86,7 @@ const App = () => {
                 </Routes>
             </div>
             <Footer />
+            {/* <Auth /> */}
         </DotGridBackground>
     );
 };
