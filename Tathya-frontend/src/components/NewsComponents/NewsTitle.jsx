@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewsTitle.css';
 
 const NewsTitle = ({ title }) => {
     return (

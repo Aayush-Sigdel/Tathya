@@ -1,0 +1,32 @@
+/* NewsTitle Styles */
+.Header-Title {
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.Header-Title h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+}
+
+/* Responsive Design for Title */
+@media (max-width: 768px) {
+    .Header-Title {
+        padding: 20px 15px;
+    }
+
+    .Header-Title h1 {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .Header-Title h1 {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,260 @@
+/* Engagement and Comments Section */
+.engagement-comments-section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.engagement-panel {
+    background: #f8f9fa;
+    border-bottom: 2px solid #e0e0e0;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Upvote Section */
+.upvote-section {
+    text-align: center;
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+.upvote-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+}
+
+.upvote-btn:hover {
+    background: #e3f2fd;
+    border-color: #1976d2;
+    color: #1976d2;
+    transform: translateY(-2px);
+}
+
+.upvote-btn.upvoted {
+    background: #1976d2;
+    border-color: #1976d2;
+    color: white;
+}
+
+.upvote-count {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.upvote-label {
+    font-size: 12px;
+    margin-top: 4px;
+    color: #666;
+}
+
+/* Action Buttons */
+.share-section,
+.report-section {
+    margin: 0;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #666;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.action-btn:hover {
+    border-color: #1976d2;
+    color: #1976d2;
+    background: #f8f9fa;
+}
+
+.report-btn:hover {
+    border-color: #f44336;
+    color: #f44336;
+}
+
+/* Comments Panel */
+.comments-panel {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+.comments-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.comments-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.comment-form {
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    resize: vertical;
+    font-family: inherit;
+    font-size: 14px;
+    margin-bottom: 10px;
+    min-height: 80px;
+    box-sizing: border-box;
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #1976d2;
+}
+
+.submit-comment-btn {
+    width: 100%;
+    padding: 12px;
+    background: #1976d2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.submit-comment-btn:hover {
+    background: #1565c0;
+    transform: translateY(-1px);
+}
+
+.submit-comment-btn:active {
+    transform: scale(0.98);
+}
+
+.comments-list {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.comments-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.comments-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.comments-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.comments-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.no-comments {
+    text-align: center;
+    color: #999;
+    padding: 40px 20px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.comment-item {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 3px solid #1976d2;
+    transition: all 0.3s ease;
+}
+
+.comment-item:hover {
+    background: #e3f2fd;
+    transform: translateX(2px);
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #333;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.comment-text {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 5px;
+}
+
+.comment-time {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Responsive Design for Comments */
+@media (max-width: 992px) {
+    .engagement-comments-section {
+        height: auto;
+        min-height: 400px;
+    }
+
+    .engagement-panel {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .engagement-panel {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .engagement-comments-section {
+        min-height: 350px;
+    }
+}

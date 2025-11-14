@@ -11,8 +11,55 @@ import NewsTitle from './NewsTitle';
 import NewsSourceButtons from './NewsSourceButtons';
 import NewsFooter from './NewsFooter';
 import NewsIframe from './NewsIframe';
-import './mainNews.css';
+// Import modularized CSS files in the correct order
+import './NewsLayout.css'; // Main layout first
+import './NewsSidebar.css'; // Sidebar components
+import './NewsHeader.css'; // Header
+import './NewsTitle.css'; // Title
+import './NewsSourceButtons.css'; // Source buttons
+import './NewsIframe.css'; // Iframe
+import './NewsMetrics.css'; // Metrics
+import './NewsComments.css'; // Comments and engagement
+import './NewsFooter.css'; // Footer
 import Loading from '../../components/Loading/Loading';
+
+// Custom Typewriter Component
+const TypewriterText = ({ text, speed = 50 }) => {
+    const [displayText, setDisplayText] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isComplete, setIsComplete] = useState(false);
+
+    useEffect(() => {
+        if (currentIndex < text.length) {
+            const timeout = setTimeout(() => {
+                setDisplayText((prev) => prev + text[currentIndex]);
+                setCurrentIndex((prev) => prev + 1);
+            }, speed);
+
+            return () => clearTimeout(timeout);
+        } else {
+            // Animation complete, remove cursor after a delay
+            const timeout = setTimeout(() => {
+                setIsComplete(true);
+            }, 1000);
+
+            return () => clearTimeout(timeout);
+        }
+    }, [currentIndex, text, speed]);
+
+    // Reset animation when text changes
+    useEffect(() => {
+        setDisplayText('');
+        setCurrentIndex(0);
+        setIsComplete(false);
+    }, [text]);
+
+    return (
+        <p className={`typewriter-text ${isComplete ? 'completed' : ''}`}>
+            {displayText}
+        </p>
+    );
+};
 
 const MainNews = ({ newsGroup }) => {
     const [activeSource, setActiveSource] = useState('');
@@ -22,6 +69,7 @@ const MainNews = ({ newsGroup }) => {
     const [hasUpvoted, setHasUpvoted] = useState(false);
     const [comments, setComments] = useState([]);
     const [commentText, setCommentText] = useState('');
+    const [summaryKey, setSummaryKey] = useState(0); // Key to trigger re-animation
     const [metrics, setMetrics] = useState({
         depthOfReporting: { upvote: 0, downvote: 0 },
         politicalBiasness: { upvote: 0, downvote: 0 },
@@ -77,6 +125,7 @@ const MainNews = ({ newsGroup }) => {
             setNewsData(processedData);
             setActiveSource(firstArticle.newsPortal);
             setCurrentArticle(firstArticle);
+            setSummaryKey((prev) => prev + 1); // Trigger summary re-animation
             setMetrics(
                 firstArticle.metrics || {
                     depthOfReporting: { upvote: 0, downvote: 0 },
@@ -117,6 +166,7 @@ const MainNews = ({ newsGroup }) => {
                 summary: sourceArticle.summary,
             };
             setNewsData(updatedData);
+            setSummaryKey((prev) => prev + 1); // Trigger summary re-animation when source changes
         }
     };
 
@@ -312,90 +362,31 @@ const MainNews = ({ newsGroup }) => {
                             </div>
 
                             {(currentArticle?.summary || newsData.summary) && (
-                                <div className="article-summary">
+                                <div
+                                    className="typewriter-container"
+                                    key={summaryKey}>
                                     <h3>Summary</h3>
-                                    <p>
-                                        {currentArticle?.summary ||
-                                            newsData.summary}
-                                    </p>
+                                    <TypewriterText
+                                        text={
+                                            currentArticle?.summary ||
+                                            newsData.summary
+                                        }
+                                        speed={30}
+                                    />
+                                    <NewsFooter onFeedback={handleFeedback} />
                                 </div>
                             )}
-
-                            {/* News Quality Metrics */}
-                            <div className="article-metrics">
-                                <h3>Rate this Article</h3>
-                                <div className="metrics-grid">
-                                    {Object.entries(metrics).map(
-                                        ([metricType, votes]) => (
-                                            <div
-                                                key={metricType}
-                                                className="metric-item">
-                                                <h4 className="metric-title">
-                                                    {metricType
-                                                        .replace(
-                                                            /([A-Z])/g,
-                                                            ' $1'
-                                                        )
-                                                        .replace(/^./, (str) =>
-                                                            str.toUpperCase()
-                                                        )}
-                                                </h4>
-                                                <div className="metric-votes">
-                                                    <button
-                                                        className={`vote-btn upvote ${
-                                                            userVotes[
-                                                                metricType
-                                                            ] === 'upvote'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            handleMetricVote(
-                                                                metricType,
-                                                                'upvote'
-                                                            )
-                                                        }>
-                                                        <ThumbsUp size={16} />
-                                                        <span>
-                                                            {votes.upvote}
-                                                        </span>
-                                                    </button>
-                                                    <button
-                                                        className={`vote-btn downvote ${
-                                                            userVotes[
-                                                                metricType
-                                                            ] === 'downvote'
-                                                                ? 'active'
-                                                                : ''
-                                                        }`}
-                                                        onClick={() =>
-                                                            handleMetricVote(
-                                                                metricType,
-                                                                'downvote'
-                                                            )
-                                                        }>
-                                                        <ThumbsDown size={16} />
-                                                        <span>
-                                                            {votes.downvote}
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        )
-                                    )}
-                                </div>
-                            </div>
                         </div>
-                        <NewsFooter onFeedback={handleFeedback} />
                     </div>
                 </main>
 
-                {/* Right Sidebar - Bias & Factuality */}
+                {/* Right Sidebar - Enhanced with Metrics */}
                 <aside className="news-sidebar-right">
-                    <div className="sidebar-panel">
-                        <h3>Coverage Details</h3>
+                    {/* Coverage Details Panel */}
+                    {/* <div className="sidebar-panel"> */}
+                    {/* <h3>Coverage Details</h3> */}
 
-                        <div className="coverage-stats">
+                    {/* <div className="coverage-stats">
                             <div className="stat-item">
                                 <span className="stat-label">
                                     Total News Sources
@@ -412,10 +403,10 @@ const MainNews = ({ newsGroup }) => {
                                     {newsGroup.news.length}
                                 </span>
                             </div>
-                        </div>
+                        </div> */}
 
-                        {/* Available Sources */}
-                        <div className="sources-panel">
+                    {/* Available Sources */}
+                    {/* <div className="sources-panel">
                             <h4>Available Sources</h4>
                             <div className="sources-list">
                                 {newsGroup.news.map((article, index) => (
@@ -435,8 +426,86 @@ const MainNews = ({ newsGroup }) => {
                                     </div>
                                 ))}
                             </div>
-                        </div>
+                        </div> */}
+                    {/* </div> */}
 
+                    {/* Article Quality Rating Panel */}
+                    <div className="sidebar-panel metrics-panel">
+                        <h3>Rate Article Quality</h3>
+                        <p className="metrics-subtitle">
+                            Help us improve news quality by rating this article
+                        </p>
+
+                        <div className="sidebar-metrics-grid">
+                            {Object.entries(metrics).map(
+                                ([metricType, votes]) => (
+                                    <div
+                                        key={metricType}
+                                        className="sidebar-metric-item">
+                                        <div className="metric-header">
+                                            <h4 className="sidebar-metric-title">
+                                                {metricType
+                                                    .replace(/([A-Z])/g, ' $1')
+                                                    .replace(/^./, (str) =>
+                                                        str.toUpperCase()
+                                                    )}
+                                            </h4>
+                                            <div className="metric-score">
+                                                <span className="score-number">
+                                                    {votes.upvote -
+                                                        votes.downvote >
+                                                    0
+                                                        ? `+${
+                                                              votes.upvote -
+                                                              votes.downvote
+                                                          }`
+                                                        : votes.upvote -
+                                                          votes.downvote}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div className="sidebar-metric-votes">
+                                            <button
+                                                className={`sidebar-vote-btn upvote ${
+                                                    userVotes[metricType] ===
+                                                    'upvote'
+                                                        ? 'active'
+                                                        : ''
+                                                }`}
+                                                onClick={() =>
+                                                    handleMetricVote(
+                                                        metricType,
+                                                        'upvote'
+                                                    )
+                                                }>
+                                                <ThumbsUp size={14} />
+                                                <span>{votes.upvote}</span>
+                                            </button>
+                                            <button
+                                                className={`sidebar-vote-btn downvote ${
+                                                    userVotes[metricType] ===
+                                                    'downvote'
+                                                        ? 'active'
+                                                        : ''
+                                                }`}
+                                                onClick={() =>
+                                                    handleMetricVote(
+                                                        metricType,
+                                                        'downvote'
+                                                    )
+                                                }>
+                                                <ThumbsDown size={14} />
+                                                <span>{votes.downvote}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Bias Analysis Panel */}
+                    {/* <div className="sidebar-panel">
                         <div className="bias-distribution">
                             <h4>Bias Distribution</h4>
                             <div className="bias-chart-placeholder">
@@ -457,9 +526,9 @@ const MainNews = ({ newsGroup }) => {
                                     <span>Right</span>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="factuality-panel">
+                    {/* <div className="factuality-panel">
                             <h4>Factuality</h4>
                             <div className="factuality-placeholder">
                                 <p>
@@ -475,7 +544,7 @@ const MainNews = ({ newsGroup }) => {
                                 <p>Ownership details will be displayed here</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </aside>
             </div>
 

@@ -10,6 +10,7 @@ import {
     RedoDotIcon,
     Twitter,
 } from 'lucide-react';
+import './NewsHeader.css';
 
 const NewsHeader = ({ publishedDate, location, updatedTime, onShare }) => {
     const handleShareClick = (platform) => {
