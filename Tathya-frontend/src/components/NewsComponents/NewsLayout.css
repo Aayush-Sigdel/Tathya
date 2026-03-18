@@ -9,7 +9,7 @@
 /* Main Layout Container - 2 Column Grid (Content + Right Sidebar) */
 .news-layout-container {
     display: grid;
-    grid-template-columns: 1fr 320px;
+    grid-template-columns: 1fr 380px; /* Increased sidebar width for comments */
     gap: 20px;
     max-width: 1600px;
     margin: 0 auto 30px;
@@ -27,11 +27,8 @@
     overflow: hidden;
 }
 
-/* Bottom Section - Iframe and Engagement/Comments */
+/* Bottom Section - Only Iframe now (full width) */
 .bottom-section-container {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 20px;
     max-width: 1600px;
     margin: 0 auto;
 }
@@ -87,7 +84,7 @@
 }
 
 .article-lead p {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     color: #333;
     line-height: 1.6;
@@ -144,17 +141,20 @@
 
 .typewriter-container h3 {
     color: #1976d2;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 12px;
-    font-weight: 600;
+    font-weight: 800;
 }
 
 .typewriter-text {
+    font-size: 1rem;
+    font-weight: 600;
     color: #555;
     line-height: 1.6;
+
     margin: 0;
-    font-family: 'Courier New', monospace;
-    white-space: nowrap;
+
+    /* white-space: nowrap; */
     overflow: hidden;
     animation: typewriter 3s steps(50, end), blink-caret 0.75s step-end infinite;
 }
@@ -232,26 +232,20 @@
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 1400px) {
     .news-layout-container {
-        grid-template-columns: 1fr 280px;
+        grid-template-columns: 1fr 340px;
         gap: 15px;
     }
 }
 
 @media (max-width: 1200px) {
     .news-layout-container {
-        grid-template-columns: 1fr;
-    }
-
-    .bottom-section-container {
-        grid-template-columns: 1fr 350px;
-        gap: 15px;
+        grid-template-columns: 1fr 300px;
     }
 }
 
 @media (max-width: 992px) {
-    .bottom-section-container {
+    .news-layout-container {
         grid-template-columns: 1fr;
-        gap: 15px;
     }
 }
 
@@ -282,10 +276,6 @@
         gap: 5px;
         align-items: flex-start;
         padding: 12px 15px;
-    }
-
-    .bottom-section-container {
-        gap: 15px;
     }
 
     .typewriter-text {

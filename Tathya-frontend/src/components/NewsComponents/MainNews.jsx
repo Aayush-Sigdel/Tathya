@@ -5,12 +5,19 @@ import {
     Share2,
     Flag,
     ThumbsDown,
+    Lock,
+    Trash2,
+    RotateCcw,
+    Send,
+    AlertTriangle,
+    LinkIcon,
 } from 'lucide-react';
 import NewsHeader from './NewsHeader';
 import NewsTitle from './NewsTitle';
 import NewsSourceButtons from './NewsSourceButtons';
 import NewsFooter from './NewsFooter';
 import NewsIframe from './NewsIframe';
+import BiasChart from './BiasChart'; // Import the new BiasChart component
 // Import modularized CSS files in the correct order
 import './NewsLayout.css'; // Main layout first
 import './NewsSidebar.css'; // Sidebar components
@@ -22,9 +29,12 @@ import './NewsMetrics.css'; // Metrics
 import './NewsComments.css'; // Comments and engagement
 import './NewsFooter.css'; // Footer
 import Loading from '../../components/Loading/Loading';
+import { VoteService, VoteUtils } from '../../services/voteService';
+import { KYCService, KYCUtils } from '../../services/kycService';
+import { CommentService, CommentUtils } from '../../services/commentService';
 
 // Custom Typewriter Component
-const TypewriterText = ({ text, speed = 50 }) => {
+const TypewriterText = ({ text, speed = 20 }) => {
     const [displayText, setDisplayText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isComplete, setIsComplete] = useState(false);
@@ -41,7 +51,7 @@ const TypewriterText = ({ text, speed = 50 }) => {
             // Animation complete, remove cursor after a delay
             const timeout = setTimeout(() => {
                 setIsComplete(true);
-            }, 1000);
+            }, 500);
 
             return () => clearTimeout(timeout);
         }
@@ -82,6 +92,18 @@ const MainNews = ({ newsGroup }) => {
         credibility: null,
         relevance: null,
     });
+    const [isLoadingVotes, setIsLoadingVotes] = useState(false);
+    const [userId] = useState(VoteUtils.getUserId());
+    const [isKycVerified, setIsKycVerified] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isCheckingKyc, setIsCheckingKyc] = useState(true);
+
+    // Comment-related state
+    const [isLoadingComments, setIsLoadingComments] = useState(false);
+    const [isSubmittingComment, setIsSubmittingComment] = useState(false);
+    const [commentSortBy, setCommentSortBy] = useState('NEWEST');
+    const [commentError, setCommentError] = useState(null);
+    const [deletingCommentId, setDeletingCommentId] = useState(null);
 
     const getTimeAgo = (dateString) => {
         const posted = new Date(dateString);
@@ -100,6 +122,85 @@ const MainNews = ({ newsGroup }) => {
         const locationMatch = lead.match(/^([^,]+),/);
         return locationMatch ? locationMatch[1].trim() : 'Nepal';
     };
+
+    // Check user KYC status using the enhanced comment service
+    const checkKycStatus = async () => {
+        try {
+            setIsCheckingKyc(true);
+            const loggedIn = CommentUtils.isLoggedIn();
+            setIsLoggedIn(loggedIn);
+
+            if (loggedIn) {
+                // Use the comment service KYC check for consistency
+                const verified = await CommentService.checkKycVerification();
+                setIsKycVerified(verified);
+            } else {
+                setIsKycVerified(false);
+            }
+        } catch (error) {
+            console.error('Failed to check KYC status:', error);
+            setIsKycVerified(false);
+        } finally {
+            setIsCheckingKyc(false);
+        }
+    };
+
+    // Load comments for the current article
+    const loadComments = async (newsId) => {
+        if (!newsId) {
+            console.log('No newsId provided for loading comments');
+            return;
+        }
+
+        try {
+            setIsLoadingComments(true);
+            setCommentError(null);
+
+            console.log(`Loading comments for article: ${newsId}`);
+            const fetchedComments = await CommentService.getCommentsByNewsId(
+                newsId,
+                commentSortBy
+            );
+
+            // Sort comments using utility function
+            const sortedComments = CommentUtils.sortComments(
+                fetchedComments,
+                commentSortBy
+            );
+            setComments(sortedComments);
+            console.log(`Loaded ${sortedComments.length} comments`);
+        } catch (error) {
+            console.error('Failed to load comments:', error);
+            setCommentError('Failed to load comments. Please try again.');
+            setComments([]); // Clear comments on error
+        } finally {
+            setIsLoadingComments(false);
+        }
+    };
+
+    // Load user votes for the current article
+    const loadUserVotes = async (newsId) => {
+        if (!newsId || !isLoggedIn) return;
+
+        try {
+            setIsLoadingVotes(true);
+            const votes = await VoteService.getUserVotesForArticle(
+                userId,
+                newsId
+            );
+            setUserVotes(votes);
+        } catch (error) {
+            console.error('Failed to load user votes:', error);
+            // Keep default state if API fails
+        } finally {
+            setIsLoadingVotes(false);
+        }
+    };
+
+    // Check KYC status on component mount
+    useEffect(() => {
+        checkKycStatus();
+    }, []);
 
     useEffect(() => {
         if (newsGroup && newsGroup.news && newsGroup.news.length > 0) {
@@ -134,8 +235,23 @@ const MainNews = ({ newsGroup }) => {
                     relevance: { upvote: 0, downvote: 0 },
                 }
             );
+
+            // Load user votes and comments for this article
+            if (firstArticle.id) {
+                if (isLoggedIn) {
+                    loadUserVotes(firstArticle.id);
+                }
+                loadComments(firstArticle.id);
+            }
         }
-    }, [newsGroup]);
+    }, [newsGroup, userId, isLoggedIn]);
+
+    // Reload comments when sort order changes
+    useEffect(() => {
+        if (currentArticle?.id) {
+            loadComments(currentArticle.id);
+        }
+    }, [commentSortBy]);
 
     const handleSourceSelect = (source) => {
         setActiveSource(source);
@@ -167,6 +283,14 @@ const MainNews = ({ newsGroup }) => {
             };
             setNewsData(updatedData);
             setSummaryKey((prev) => prev + 1); // Trigger summary re-animation when source changes
+
+            // Load user votes and comments for the new article
+            if (sourceArticle.id) {
+                if (isLoggedIn) {
+                    loadUserVotes(sourceArticle.id);
+                }
+                loadComments(sourceArticle.id);
+            }
         }
     };
 
@@ -207,43 +331,157 @@ const MainNews = ({ newsGroup }) => {
         }
     };
 
-    const handleMetricVote = (metricType, voteType) => {
+    const handleMetricVote = async (metricType, voteType) => {
+        // Check if user can perform voting action
+        const canVote = await KYCUtils.canPerformAction('vote on articles');
+        if (!canVote) {
+            return;
+        }
+
+        if (!currentArticle?.id) {
+            console.error('No article ID available for voting');
+            return;
+        }
+
         const currentVote = userVotes[metricType];
+        const voteValue = VoteUtils.voteTypeToValue(voteType);
+
+        // If user clicks the same vote type they already have, do nothing (no removal allowed)
+        if (currentVote === voteValue) {
+            return;
+        }
+
+        // Store previous state for rollback
+        const previousMetrics = { ...metrics };
+        const previousUserVotes = { ...userVotes };
+
+        // Optimistic update
         let newMetrics = { ...metrics };
         let newUserVotes = { ...userVotes };
 
-        // If user had already voted
+        // If user had already voted for the opposite type, remove that vote first
         if (currentVote) {
-            // Remove the previous vote
-            newMetrics[metricType][currentVote]--;
+            const currentVoteType = VoteUtils.valueToVoteType(currentVote);
+            newMetrics[metricType][currentVoteType]--;
         }
 
-        // If clicking the same vote type, remove the vote
-        if (currentVote === voteType) {
-            newUserVotes[metricType] = null;
-        } else {
-            // Add the new vote
-            newMetrics[metricType][voteType]++;
-            newUserVotes[metricType] = voteType;
-        }
+        // Add the new vote
+        newMetrics[metricType][voteType]++;
+        newUserVotes[metricType] = voteValue;
 
+        // Update state optimistically
         setMetrics(newMetrics);
         setUserVotes(newUserVotes);
+
+        try {
+            // Make API call
+            const response = await VoteService.submitVote(
+                userId,
+                currentArticle.id,
+                metricType,
+                voteValue
+            );
+
+            // Log the response for debugging
+            console.log('Vote response:', response);
+        } catch (error) {
+            console.error('Failed to submit vote:', error);
+
+            // Revert optimistic update on error
+            setMetrics(previousMetrics);
+            setUserVotes(previousUserVotes);
+
+            // Show user-friendly error message
+            alert('Failed to submit vote. Please try again.');
+        }
     };
 
-    const handleCommentSubmit = (e) => {
+    const handleCommentSubmit = async (e) => {
         e.preventDefault();
-        if (commentText.trim()) {
-            setComments([
-                ...comments,
-                {
-                    id: Date.now(),
-                    text: commentText,
-                    author: 'Anonymous User',
-                    timestamp: new Date().toISOString(),
+
+        try {
+            // Clear any previous errors
+            setCommentError(null);
+
+            // Check if user can perform commenting action with live KYC verification
+            console.log('Checking if user can comment...');
+            const canComment = await CommentUtils.canPerformAction('comment');
+            if (!canComment) {
+                return;
+            }
+
+            if (!currentArticle?.id) {
+                setCommentError('No article selected for commenting');
+                return;
+            }
+
+            // Validate comment content
+            const validation = CommentUtils.validateComment(commentText);
+            if (!validation.isValid) {
+                setCommentError(validation.error);
+                return;
+            }
+
+            setIsSubmittingComment(true);
+
+            // Submit comment to backend
+            console.log('Submitting comment to backend...');
+            const newComment = await CommentService.postComment(
+                CommentUtils.getUserId(),
+                currentArticle.id,
+                commentText.trim()
+            );
+
+            console.log('Comment submitted successfully:', newComment);
+
+            // Add the new comment to local state (optimistic update)
+            const commentWithDisplayData = {
+                ...newComment,
+                user: {
+                    userName: localStorage.getItem('userName') || 'You',
+                    email: localStorage.getItem('userEmail'),
                 },
-            ]);
+                createdAt: new Date().toISOString(),
+                userId: CommentUtils.getUserId(),
+            };
+
+            // Add to the beginning for newest first sorting
+            setComments((prev) => [commentWithDisplayData, ...prev]);
+
+            // Clear the comment input
             setCommentText('');
+        } catch (error) {
+            console.error('Failed to submit comment:', error);
+            setCommentError(`Failed to post comment: ${error.message}`);
+        } finally {
+            setIsSubmittingComment(false);
+        }
+    };
+
+    const handleCommentDelete = async (commentId) => {
+        if (!commentId) return;
+
+        // Confirm deletion
+        const confirmed = window.confirm(
+            'Are you sure you want to delete this comment?'
+        );
+        if (!confirmed) return;
+
+        try {
+            setDeletingCommentId(commentId);
+
+            // Delete comment via API
+            await CommentService.deleteComment(commentId);
+
+            // Remove comment from local state
+            setComments((prev) =>
+                prev.filter((comment) => comment.id !== commentId)
+            );
+        } catch (error) {
+            console.error('Failed to delete comment:', error);
+            alert('Failed to delete comment. Please try again.');
+        } finally {
+            setDeletingCommentId(null);
         }
     };
 
@@ -325,12 +563,6 @@ const MainNews = ({ newsGroup }) => {
                             title={currentArticle?.title || newsData.title}
                         />
 
-                        <NewsSourceButtons
-                            sources={newsData.sources}
-                            onSourceSelect={handleSourceSelect}
-                            activeSource={activeSource}
-                        />
-
                         {(currentArticle?.imageUrl || newsData.imageUrl) && (
                             <div className="article-image-container">
                                 <img
@@ -346,20 +578,32 @@ const MainNews = ({ newsGroup }) => {
                                         e.target.style.display = 'none';
                                     }}
                                 />
+                                <NewsSourceButtons
+                                    sources={newsData.sources}
+                                    onSourceSelect={handleSourceSelect}
+                                    activeSource={activeSource}
+                                />
                             </div>
                         )}
 
+                        {/* NEW: Political Bias Analysis Panel */}
+                        <div className="bias-panel">
+                            <BiasChart
+                                newsData={newsGroup}
+                                activeSource={activeSource}
+                            />
+                        </div>
                         <div className="article-content">
                             <div className="article-lead">
                                 <p>{newsData.lead}</p>
                             </div>
 
-                            <div className="article-description">
+                            {/* <div className="article-description">
                                 <p>
                                     {currentArticle?.description ||
                                         newsData.description}
                                 </p>
-                            </div>
+                            </div> */}
 
                             {(currentArticle?.summary || newsData.summary) && (
                                 <div
@@ -371,7 +615,7 @@ const MainNews = ({ newsGroup }) => {
                                             currentArticle?.summary ||
                                             newsData.summary
                                         }
-                                        speed={30}
+                                        speed={10}
                                     />
                                     <NewsFooter onFeedback={handleFeedback} />
                                 </div>
@@ -382,59 +626,26 @@ const MainNews = ({ newsGroup }) => {
 
                 {/* Right Sidebar - Enhanced with Metrics */}
                 <aside className="news-sidebar-right">
-                    {/* Coverage Details Panel */}
-                    {/* <div className="sidebar-panel"> */}
-                    {/* <h3>Coverage Details</h3> */}
-
-                    {/* <div className="coverage-stats">
-                            <div className="stat-item">
-                                <span className="stat-label">
-                                    Total News Sources
-                                </span>
-                                <span className="stat-value">
-                                    {newsData.sources.length}
-                                </span>
-                            </div>
-                            <div className="stat-item">
-                                <span className="stat-label">
-                                    Articles in Group
-                                </span>
-                                <span className="stat-value">
-                                    {newsGroup.news.length}
-                                </span>
-                            </div>
-                        </div> */}
-
-                    {/* Available Sources */}
-                    {/* <div className="sources-panel">
-                            <h4>Available Sources</h4>
-                            <div className="sources-list">
-                                {newsGroup.news.map((article, index) => (
-                                    <div
-                                        key={index}
-                                        className={`source-item ${
-                                            article.newsPortal === activeSource
-                                                ? 'active'
-                                                : ''
-                                        }`}>
-                                        <span className="source-name">
-                                            {article.newsPortal}
-                                        </span>
-                                        <span className="source-category">
-                                            {article.category}
-                                        </span>
-                                    </div>
-                                ))}
-                            </div>
-                        </div> */}
-                    {/* </div> */}
-
                     {/* Article Quality Rating Panel */}
                     <div className="sidebar-panel metrics-panel">
-                        <h3>Rate Article Quality</h3>
-                        <p className="metrics-subtitle">
-                            Help us improve news quality by rating this article
-                        </p>
+                        {/* KYC Status Indicator */}
+                        {!isLoggedIn ? (
+                            <div className="kyc-status-indicator login-required">
+                                <Lock size={16} />
+                                <span>Login required to vote</span>
+                            </div>
+                        ) : !isKycVerified ? (
+                            <div className="kyc-status-indicator kyc-required">
+                                <Lock size={16} />
+                                <span>KYC verification required to vote</span>
+                            </div>
+                        ) : null}
+
+                        {isCheckingKyc && (
+                            <div className="loading-votes">
+                                <p>Checking verification status...</p>
+                            </div>
+                        )}
 
                         <div className="sidebar-metrics-grid">
                             {Object.entries(metrics).map(
@@ -467,9 +678,13 @@ const MainNews = ({ newsGroup }) => {
                                         <div className="sidebar-metric-votes">
                                             <button
                                                 className={`sidebar-vote-btn upvote ${
-                                                    userVotes[metricType] ===
-                                                    'upvote'
+                                                    userVotes[metricType] === 1
                                                         ? 'active'
+                                                        : ''
+                                                } ${
+                                                    !isLoggedIn ||
+                                                    !isKycVerified
+                                                        ? 'disabled'
                                                         : ''
                                                 }`}
                                                 onClick={() =>
@@ -477,15 +692,32 @@ const MainNews = ({ newsGroup }) => {
                                                         metricType,
                                                         'upvote'
                                                     )
+                                                }
+                                                disabled={
+                                                    isLoadingVotes ||
+                                                    isCheckingKyc ||
+                                                    !isLoggedIn ||
+                                                    !isKycVerified
+                                                }
+                                                title={
+                                                    !isLoggedIn
+                                                        ? 'Login required to vote'
+                                                        : !isKycVerified
+                                                        ? 'KYC verification required to vote'
+                                                        : 'Upvote this metric'
                                                 }>
                                                 <ThumbsUp size={14} />
                                                 <span>{votes.upvote}</span>
                                             </button>
                                             <button
                                                 className={`sidebar-vote-btn downvote ${
-                                                    userVotes[metricType] ===
-                                                    'downvote'
+                                                    userVotes[metricType] === -1
                                                         ? 'active'
+                                                        : ''
+                                                } ${
+                                                    !isLoggedIn ||
+                                                    !isKycVerified
+                                                        ? 'disabled'
                                                         : ''
                                                 }`}
                                                 onClick={() =>
@@ -493,6 +725,19 @@ const MainNews = ({ newsGroup }) => {
                                                         metricType,
                                                         'downvote'
                                                     )
+                                                }
+                                                disabled={
+                                                    isLoadingVotes ||
+                                                    isCheckingKyc ||
+                                                    !isLoggedIn ||
+                                                    !isKycVerified
+                                                }
+                                                title={
+                                                    !isLoggedIn
+                                                        ? 'Login required to vote'
+                                                        : !isKycVerified
+                                                        ? 'KYC verification required to vote'
+                                                        : 'Downvote this metric'
                                                 }>
                                                 <ThumbsDown size={14} />
                                                 <span>{votes.downvote}</span>
@@ -504,128 +749,112 @@ const MainNews = ({ newsGroup }) => {
                         </div>
                     </div>
 
-                    {/* Bias Analysis Panel */}
-                    {/* <div className="sidebar-panel">
-                        <div className="bias-distribution">
-                            <h4>Bias Distribution</h4>
-                            <div className="bias-chart-placeholder">
-                                <div className="bias-bar">
-                                    <div
-                                        className="bias-segment left"
-                                        style={{ width: '30%' }}></div>
-                                    <div
-                                        className="bias-segment center"
-                                        style={{ width: '40%' }}></div>
-                                    <div
-                                        className="bias-segment right"
-                                        style={{ width: '30%' }}></div>
-                                </div>
-                                <div className="bias-labels">
-                                    <span>Left</span>
-                                    <span>Center</span>
-                                    <span>Right</span>
-                                </div>
-                            </div>
-                        </div> */}
-
-                    {/* <div className="factuality-panel">
-                            <h4>Factuality</h4>
-                            <div className="factuality-placeholder">
-                                <p>
-                                    Factuality information will be displayed
-                                    here
-                                </p>
-                            </div>
-                        </div>
-
-                        <div className="ownership-panel">
-                            <h4>Ownership</h4>
-                            <div className="ownership-placeholder">
-                                <p>Ownership details will be displayed here</p>
-                            </div>
-                        </div>
-                    </div> */}
-                </aside>
-            </div>
-
-            {/* Bottom Section - Iframe and Engagement/Comments Side by Side */}
-            <div className="bottom-section-container">
-                {/* Source Iframe */}
-                <div className="iframe-section">
-                    <div className="iframe-header">
-                        <h3>Read from Original Source: {activeSource}</h3>
-                    </div>
-                    <NewsIframe
-                        src={getSourceUrl(activeSource)}
-                        title={`${activeSource} - ${
-                            currentArticle?.title || newsData.title
-                        }`}
-                    />
-                </div>
-
-                {/* Right Side - Engagement Panel and Comments */}
-                <div className="engagement-comments-section">
-                    {/* Engagement Panel */}
-                    <div className="engagement-panel">
-                        {/* Upvotes Section */}
-                        <div className="upvote-section">
-                            <button
-                                className={`upvote-btn ${
-                                    hasUpvoted ? 'upvoted' : ''
-                                }`}
-                                onClick={handleUpvote}>
-                                <ThumbsUp size={24} />
-                                <span className="upvote-count">{upvotes}</span>
-                            </button>
-                            <p className="upvote-label">Upvotes</p>
-                        </div>
-
-                        {/* Share Section */}
-                        <div className="share-section">
-                            <button
-                                className="action-btn"
-                                onClick={() => handleShare('twitter')}>
-                                <Share2 size={20} />
-                                <span>Share</span>
-                            </button>
-                        </div>
-
-                        {/* Report Section */}
-                        <div className="report-section">
-                            <button
-                                className="action-btn report-btn"
-                                onClick={handleFeedback}>
-                                <Flag size={20} />
-                                <span>Report</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Comments Section */}
+                    {/* Comments Section - Moved below the voting panel */}
                     <div className="comments-panel">
                         <div className="comments-header">
                             <MessageSquare size={20} />
                             <h3>Comments ({comments.length})</h3>
+
+                            {/* Comment Sort Options */}
+                            <select
+                                value={commentSortBy}
+                                onChange={(e) =>
+                                    setCommentSortBy(e.target.value)
+                                }
+                                className="comment-sort-select">
+                                <option value="NEWEST">Newest First</option>
+                                <option value="OLDEST">Oldest First</option>
+                            </select>
                         </div>
+
+                        {/* Comment Error Display */}
+                        {commentError && (
+                            <div className="comment-error">
+                                <AlertTriangle size={16} />
+                                <span>{commentError}</span>
+                                <button onClick={() => setCommentError(null)}>
+                                    ×
+                                </button>
+                            </div>
+                        )}
 
                         <form
                             className="comment-form"
                             onSubmit={handleCommentSubmit}>
                             <textarea
-                                placeholder="Add your comment..."
+                                placeholder={
+                                    !isLoggedIn
+                                        ? 'Login required to comment...'
+                                        : !isKycVerified
+                                        ? 'KYC verification required to comment...'
+                                        : 'Add your comment...'
+                                }
                                 value={commentText}
                                 onChange={(e) => setCommentText(e.target.value)}
                                 rows={3}
+                                disabled={
+                                    !isLoggedIn ||
+                                    !isKycVerified ||
+                                    isSubmittingComment
+                                }
+                                maxLength={1000}
                             />
-                            <button
-                                type="submit"
-                                className="submit-comment-btn">
-                                Post Comment
-                            </button>
+                            <div className="comment-form-footer">
+                                <span className="character-count">
+                                    {commentText.length}/1000
+                                </span>
+                                <button
+                                    type="submit"
+                                    className={`submit-comment-btn ${
+                                        !isLoggedIn ||
+                                        !isKycVerified ||
+                                        isSubmittingComment
+                                            ? 'disabled'
+                                            : ''
+                                    }`}
+                                    disabled={
+                                        !isLoggedIn ||
+                                        !isKycVerified ||
+                                        isSubmittingComment
+                                    }
+                                    title={
+                                        !isLoggedIn
+                                            ? 'Login required to comment'
+                                            : !isKycVerified
+                                            ? 'KYC verification required to comment'
+                                            : 'Post your comment'
+                                    }>
+                                    {isSubmittingComment ? (
+                                        <>
+                                            <RotateCcw
+                                                size={16}
+                                                className="spinning"
+                                            />
+                                            Posting...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Send size={16} />
+                                            Post Comment
+                                        </>
+                                    )}
+                                    {(!isLoggedIn || !isKycVerified) && (
+                                        <Lock
+                                            size={16}
+                                            style={{ marginLeft: '8px' }}
+                                        />
+                                    )}
+                                </button>
+                            </div>
                         </form>
 
                         <div className="comments-list">
-                            {comments.length === 0 ? (
+                            {isLoadingComments ? (
+                                <div className="comments-loading">
+                                    <Loading />
+                                    <p>Loading comments...</p>
+                                </div>
+                            ) : comments.length === 0 ? (
                                 <p className="no-comments">
                                     No comments yet. Be the first to comment!
                                 </p>
@@ -634,20 +863,89 @@ const MainNews = ({ newsGroup }) => {
                                     <div
                                         key={comment.id}
                                         className="comment-item">
-                                        <div className="comment-author">
-                                            {comment.author}
+                                        <div className="comment-header">
+                                            <div className="comment-author">
+                                                {CommentUtils.getAuthorDisplayName(
+                                                    comment
+                                                )}
+                                            </div>
+                                            <div className="comment-meta">
+                                                <span className="comment-time">
+                                                    {CommentUtils.formatCommentTime(
+                                                        comment.createdAt ||
+                                                            comment.timestamp
+                                                    )}
+                                                </span>
+                                                {CommentUtils.isCommentOwner(
+                                                    comment
+                                                ) && (
+                                                    <button
+                                                        className="comment-delete-btn"
+                                                        onClick={() =>
+                                                            handleCommentDelete(
+                                                                comment.id
+                                                            )
+                                                        }
+                                                        disabled={
+                                                            deletingCommentId ===
+                                                            comment.id
+                                                        }
+                                                        title="Delete comment">
+                                                        {deletingCommentId ===
+                                                        comment.id ? (
+                                                            <RotateCcw
+                                                                size={12}
+                                                                className="spinning"
+                                                            />
+                                                        ) : (
+                                                            <Trash2 size={12} />
+                                                        )}
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
-                                        <div className="comment-text">
-                                            {comment.text}
-                                        </div>
-                                        <div className="comment-time">
-                                            {getTimeAgo(comment.timestamp)}
+                                        <div className="comment-content">
+                                            {comment.content || comment.text}
                                         </div>
                                     </div>
                                 ))
                             )}
                         </div>
                     </div>
+                </aside>
+            </div>
+
+            {/* Bottom Section - Only Iframe now */}
+            <div className="bottom-section-container">
+                {/* Source Iframe */}
+                <div className="iframe-section">
+                    <div
+                        className="iframe-header"
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                        }}>
+                        <h3>Read from Original Source: {activeSource}</h3>
+                        <div className="iframe-actions">
+                            <a
+                                href={getSourceUrl(activeSource)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="open-source-btn"
+                                title={`Open ${
+                                    activeSource || 'source'
+                                } in a new tab`}>
+                                <Send size={16} />
+                            </a>
+                        </div>
+                    </div>
+                    <NewsIframe
+                        src={getSourceUrl(activeSource)}
+                        title={`${activeSource} - ${
+                            currentArticle?.title || newsData.title
+                        }`}
+                    />
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@
 .article-metrics h3 {
     margin-bottom: 20px;
     color: #2c3e50;
-    font-size: 18px;
+    font-size: 16px; /* Reduced from 18px */
     font-weight: 600;
     border-bottom: 2px solid #f0f0f0;
     padding-bottom: 10px;
@@ -37,7 +37,7 @@
 }
 
 .metric-title {
-    font-size: 14px;
+    font-size: 13px; /* Reduced from 14px */
     font-weight: 600;
     color: #495057;
     margin-bottom: 10px;
@@ -60,7 +60,7 @@
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease;
-    font-size: 14px;
+    font-size: 13px; /* Reduced from 14px */
     font-weight: 500;
     min-width: 60px;
     justify-content: center;
@@ -107,6 +107,169 @@
     font-weight: 600;
 }
 
+/* Sidebar Metrics Panel */
+.sidebar-panel.metrics-panel {
+    padding: 15px;
+}
+
+.sidebar-metrics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-metric-item {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid #e9ecef;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.sidebar-metric-title {
+    font-size: 12px; /* Reduced from 13px */
+    font-weight: 600;
+    color: #495057;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.metric-score {
+    display: flex;
+    align-items: center;
+}
+
+.score-number {
+    font-size: 13px; /* Reduced from 14px */
+    font-weight: 700;
+    color: #1976d2;
+    background: #e3f2fd;
+    padding: 2px 6px;
+    border-radius: 10px;
+    min-width: 24px;
+    text-align: center;
+}
+
+.sidebar-metric-votes {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.sidebar-vote-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border: 1px solid #dee2e6;
+    background: #fff;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 11px; /* Reduced from 12px */
+    font-weight: 500;
+    min-width: 45px;
+    justify-content: center;
+}
+
+.sidebar-vote-btn:hover:not(.disabled) {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+}
+
+.sidebar-vote-btn.upvote {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.sidebar-vote-btn.upvote.active {
+    background: #28a745;
+    color: white;
+}
+
+.sidebar-vote-btn.downvote {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.sidebar-vote-btn.downvote.active {
+    background: #dc3545;
+    color: white;
+}
+
+/* KYC Status Indicators */
+.kyc-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px; /* Reduced from 14px */
+    font-weight: 500;
+    margin-bottom: 12px;
+    border: 1px solid;
+}
+
+.kyc-status-indicator.login-required {
+    background-color: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.kyc-status-indicator.kyc-required {
+    background-color: #fee2e2;
+    border-color: #ef4444;
+    color: #dc2626;
+}
+
+.kyc-status-indicator.kyc-verified {
+    background-color: #dcfce7;
+    border-color: #22c55e;
+    color: #166534;
+}
+
+.loading-votes {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+    font-size: 12px; /* Reduced from 13px */
+}
+
+/* Disabled states */
+.sidebar-vote-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.sidebar-vote-btn.disabled:hover {
+    transform: none;
+    background-color: inherit;
+}
+
+/* Disabled comment form */
+.comment-form textarea:disabled {
+    background-color: #f3f4f6;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.submit-comment-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #d1d5db;
+}
+
+.submit-comment-btn.disabled:hover {
+    background-color: #d1d5db;
+    transform: none;
+}
+
 /* ===== RESPONSIVE DESIGN FOR METRICS ===== */
 @media (max-width: 768px) {
     .metrics-grid {
@@ -120,7 +283,7 @@
 
     .vote-btn {
         padding: 6px 10px;
-        font-size: 13px;
+        font-size: 12px; /* Reduced from 13px */
         min-width: 50px;
     }
 
@@ -128,9 +291,13 @@
         gap: 10px;
     }
 
-    .article-metrics span {
-        padding: 6px 12px;
-        font-size: 13px;
+    .sidebar-metric-title {
+        font-size: 11px; /* Reduced */
+    }
+
+    .sidebar-vote-btn {
+        font-size: 10px; /* Reduced */
+        padding: 5px 8px;
     }
 }
 
@@ -140,12 +307,20 @@
     }
 
     .metric-title {
-        font-size: 13px;
+        font-size: 12px; /* Reduced from 13px */
     }
 
     .vote-btn {
         padding: 5px 8px;
-        font-size: 12px;
+        font-size: 11px; /* Reduced from 12px */
         min-width: 45px;
+    }
+
+    .sidebar-metric-title {
+        font-size: 10px; /* Reduced */
+    }
+
+    .score-number {
+        font-size: 11px; /* Reduced */
     }
 }

@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './latestStories.module.css';
 import BiasMeta from '../bias/biasMeta';
-import dummyData from '../../components/NewsComponents/dummydata.json';
+import { useLatestNews } from '../../services/fetchNewsData';
 
 const LatestStories = () => {
-    const newsGroups = dummyData.newsGroups || [];
+    const { data: newsGroups, loading, error, refetch } = useLatestNews(5);
 
     // Helper function to extract location from lead
     const extractLocation = (lead) => {
@@ -43,6 +43,48 @@ const LatestStories = () => {
         };
     });
 
+    // Loading state
+    if (loading) {
+        return (
+            <div className={styles['latest-stories-container']}>
+                <h2 className={styles['section-title']}>Latest Stories</h2>
+                <div className={styles['loading-container']}>
+                    <div className={styles['loading-spinner']}></div>
+                    <p>Loading latest stories...</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Error state
+    if (error) {
+        return (
+            <div className={styles['latest-stories-container']}>
+                <h2 className={styles['section-title']}>Latest Stories</h2>
+                <div className={styles['error-container']}>
+                    <p>Failed to load latest stories</p>
+                    <button
+                        onClick={refetch}
+                        className={styles['retry-button']}>
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        );
+    }
+
+    // Empty state
+    if (stories.length === 0) {
+        return (
+            <div className={styles['latest-stories-container']}>
+                <h2 className={styles['section-title']}>Latest Stories</h2>
+                <div className={styles['empty-container']}>
+                    <p>No stories available at the moment</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={styles['latest-stories-container']}>
             <h2 className={styles['section-title']}>Latest Stories</h2>
@@ -72,7 +114,6 @@ const LatestStories = () => {
                             </div>
 
                             <h3 className={styles['story-title']}>
-                                {' '}
                                 {story.title}
                             </h3>
 
@@ -89,12 +130,21 @@ const LatestStories = () => {
                                 className={styles['story-image']}
                                 onError={(e) => {
                                     e.target.src =
-                                        'https://placehold.co/300x200';
+                                        'https://placehold.co/300x200?text=News';
                                 }}
                             />
                         </div>
                     </Link>
                 ))}
+            </div>
+
+            <div className={styles['refresh-container']}>
+                <button
+                    onClick={refetch}
+                    className={styles['refresh-button']}
+                    disabled={loading}>
+                    {loading ? 'Refreshing...' : 'Refresh Stories'}
+                </button>
             </div>
         </div>
     );

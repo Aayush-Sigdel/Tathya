@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Clock, Eye, ArrowRight, Calendar, Globe, Users } from 'lucide-react';
+import { ArrowRight, Calendar, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import './newspreview.css';
 import dummyData from '../NewsComponents/dummydata.json';
@@ -13,7 +13,7 @@ const NewsPreview = ({
     const [newsGroups, setNewsGroups] = useState([]);
     const navigate = useNavigate();
 
-    // Load news groups from dummydata.json (single source of truth)
+    // Load news groups from dummydata.json
     useEffect(() => {
         try {
             const groups = Array.isArray(dummyData?.newsGroups)
@@ -26,10 +26,6 @@ const NewsPreview = ({
         }
     }, []);
 
-    // Debug: Log the current category
-    console.log('NewsPreview - Selected Category:', selectedCategory);
-    console.log('NewsPreview - Total News Groups:', newsGroups.length);
-
     // Filter news groups based on selected category
     const filteredNewsGroups =
         selectedCategory === 'All'
@@ -40,11 +36,6 @@ const NewsPreview = ({
                   )
               );
 
-    console.log(
-        'NewsPreview - Filtered News Groups:',
-        filteredNewsGroups.length
-    );
-
     // Calculate time ago from posted date
     const getTimeAgo = (dateString) => {
         const posted = new Date(dateString);
@@ -52,14 +43,14 @@ const NewsPreview = ({
         const diffInHours = Math.floor((now - posted) / (1000 * 60 * 60));
 
         if (diffInHours < 24) {
-            return `${diffInHours} hours ago`;
+            return `${diffInHours}h ago`;
         } else {
             const diffInDays = Math.floor(diffInHours / 24);
-            return `${diffInDays} days ago`;
+            return `${diffInDays}d ago`;
         }
     };
 
-    // Get category color based on the primary article's category
+    // Get category color
     const getCategoryColor = (category) => {
         const colors = {
             Politics: '#e74c3c',
@@ -77,17 +68,6 @@ const NewsPreview = ({
         return newsGroup.news[0];
     };
 
-    // Calculate average credibility score for the news group
-    const getAverageCredibility = (newsGroup) => {
-        const total = newsGroup.news.reduce((sum, article) => {
-            const upvotes = article.metrics.credibility.upvote;
-            const downvotes = article.metrics.credibility.downvote;
-            const score = (upvotes / (upvotes + downvotes)) * 100;
-            return sum + score;
-        }, 0);
-        return Math.round(total / newsGroup.news.length);
-    };
-
     const handleCardClick = (newsGroup) => {
         if (onArticleSelect) {
             onArticleSelect(newsGroup);
@@ -101,7 +81,6 @@ const NewsPreview = ({
             <div className="news-preview-grid">
                 {filteredNewsGroups.map((newsGroup, index) => {
                     const primaryArticle = getPrimaryArticle(newsGroup);
-                    const credibilityScore = getAverageCredibility(newsGroup);
 
                     return (
                         <div
@@ -116,10 +95,10 @@ const NewsPreview = ({
                                     alt={primaryArticle.title}
                                     onError={(e) => {
                                         e.target.src =
-                                            'https://placehold.co/600x400';
+                                            'https://placehold.co/600x300';
                                     }}
                                 />
-                                <div className="card-overlay">
+                                {/* <div className="card-overlay">
                                     <span
                                         className="category-badge"
                                         style={{
@@ -129,84 +108,28 @@ const NewsPreview = ({
                                         }}>
                                         {primaryArticle.category}
                                     </span>
-                                    <div className="sources-count">
-                                        <Users size={14} />
-                                        <span>
-                                            {newsGroup.sources.length} sources
-                                        </span>
-                                    </div>
-                                </div>
+                                    <span className="sources-count">
+                                        <Users size={12} />
+                                        {newsGroup.sources.length} sources
+                                    </span>
+                                </div> */}
                             </div>
 
                             <div className="card-content">
                                 <div className="card-meta">
-                                    <div className="meta-item">
+                                    <span className="time-ago">
                                         <Calendar size={14} />
-                                        <span>
-                                            {getTimeAgo(
-                                                primaryArticle.postedAt
-                                            )}
-                                        </span>
-                                    </div>
-                                    <div className="meta-item credibility-score">
-                                        <Globe size={14} />
-                                        <span>
-                                            {credibilityScore}% credible
-                                        </span>
-                                    </div>
+                                        {getTimeAgo(primaryArticle.postedAt)}
+                                    </span>
                                 </div>
 
                                 <h3 className="card-title">
                                     {primaryArticle.title}
                                 </h3>
 
-                                <p className="card-lead">
-                                    {primaryArticle.lead}
-                                </p>
-
-                                <div className="card-sources">
-                                    <h4>Coverage by:</h4>
-                                    <div className="sources-list">
-                                        {newsGroup.sources
-                                            .slice(0, 3)
-                                            .map((source, idx) => (
-                                                <span
-                                                    key={idx}
-                                                    className="source-tag">
-                                                    {source}
-                                                </span>
-                                            ))}
-                                        {newsGroup.sources.length > 3 && (
-                                            <span className="source-tag more">
-                                                +{newsGroup.sources.length - 3}{' '}
-                                                more
-                                            </span>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <div className="card-footer">
-                                    <div className="metrics">
-                                        <span className="articles-count">
-                                            {newsGroup.news.length} articles
-                                        </span>
-                                        <div
-                                            className="credibility-indicator"
-                                            style={{
-                                                backgroundColor:
-                                                    credibilityScore > 70
-                                                        ? '#27ae60'
-                                                        : credibilityScore > 50
-                                                        ? '#f39c12'
-                                                        : '#e74c3c',
-                                            }}>
-                                            {credibilityScore}%
-                                        </div>
-                                    </div>
-
-                                    <div className="read-more">
-                                        <Eye size={16} />
-                                        <span>Compare Sources</span>
+                                {/* <div className="card-footer">
+                                    <span className="read-more">
+                                        Compare Sources
                                         <ArrowRight
                                             size={16}
                                             className={`arrow ${
@@ -215,8 +138,8 @@ const NewsPreview = ({
                                                     : ''
                                             }`}
                                         />
-                                    </div>
-                                </div>
+                                    </span>
+                                </div> */}
                             </div>
                         </div>
                     );
@@ -225,11 +148,8 @@ const NewsPreview = ({
 
             {filteredNewsGroups.length === 0 && (
                 <div className="no-articles">
-                    <h3>No news groups found</h3>
-                    <p>
-                        No news coverage found for the "{selectedCategory}"
-                        category.
-                    </p>
+                    <h3>No news found</h3>
+                    <p>No articles found for "{selectedCategory}" category.</p>
                     <button
                         className="reset-filter-btn"
                         onClick={() =>

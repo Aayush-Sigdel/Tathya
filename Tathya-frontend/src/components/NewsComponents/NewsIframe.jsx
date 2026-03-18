@@ -7,7 +7,7 @@ const NewsIframe = ({ src, title }) => {
             <iframe
                 src={src}
                 title={title || 'News Source'}
-                loading="lazy"
+                loading="eager"
                 sandbox="allow-scripts allow-same-origin"
             />
         </div>

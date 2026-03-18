@@ -1,6 +1,6 @@
 /* Right Sidebar - Coverage Details */
 .news-sidebar-right {
-    position: sticky;
+    /* position: sticky; */
     top: 100px;
     height: fit-content;
     display: flex;

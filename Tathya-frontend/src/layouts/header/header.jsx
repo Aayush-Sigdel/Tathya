@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css';
 import ThemeSwitch from '../../components/switch/themeSwitch';
 import Loading from '../../components/Loading/Loading';
 import '../../components/Loading/Loading.css';
 import LogoSvg from '../../assets/Logo-main.svg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import {
     Calendar,
@@ -14,7 +15,6 @@ import {
     Snowflake,
     CloudLightning,
     CloudFog,
-    Mail,
 } from 'lucide-react';
 
 const Header = () => {
@@ -139,17 +139,16 @@ const Header = () => {
     return (
         <header className={styles['header-main']}>
             <div>
-                <Link
-                    to="/"
-                    >
-                <img
-                    src={LogoSvg}
-                    alt="Tathya logo"
-                    style={{ height: '75px', marginRight: '8px' }}
-                />
+                <Link to="/">
+                    <img
+                        src={LogoSvg}
+                        alt="Tathya logo"
+                        style={{ height: '75px', marginRight: '8px' }}
+                    />
                 </Link>
             </div>
-            <div>
+
+            <div className={styles['header-center']}>
                 <div className={styles['header-inner']}>
                     <div className={styles['header-items']}>
                         {getWeatherIcon(weather.condition)}
@@ -195,14 +194,9 @@ const Header = () => {
                         </p>
                     </div>
                 </div>
-                {/* <div
-                className={styles['header-inner']}
-                style={{ flexGrow: 0.2 }}>
-                <div>
-                    <ThemeSwitch />
-                </div>
-            </div> */}
             </div>
+
+            {/* User section has been moved to Navbar */}
         </header>
     );
 };
